@@ -24,6 +24,7 @@ import java.util.Locale;
 import junit.extensions.TestSetup;
 import junit.framework.Test;
 import junit.framework.TestSuite;
+import net.sf.freecol.common.debug.CodeCoverage;
 
 
 /**
@@ -46,6 +47,10 @@ public class AllTests {
         TestSetup wrapper = new TestSetup(suite) {
             public void setUp() {
                 Locale.setDefault(Locale.US);
+            }
+
+            public void tearDown() {
+                CodeCoverage.print();
             }
         };
         return wrapper;
