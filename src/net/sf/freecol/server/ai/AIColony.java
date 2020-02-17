@@ -65,6 +65,8 @@ import net.sf.freecol.common.model.WorkLocation;
 import static net.sf.freecol.common.util.CollectionUtils.*;
 import net.sf.freecol.common.util.LogBuilder;
 
+import net.sf.freecol.common.debug.CodeCoverage;
+
 
 /**
  * Objects of this class contains AI-information for a single {@link Colony}.
@@ -1242,38 +1244,52 @@ public final class AIColony extends AIObject implements PropertyChangeListener {
         List<WorkLocation> wls = transform(colony.getAvailableWorkLocations(),
                                            w -> w instanceof ColonyTile);
         List<TileImprovementPlan> newPlans = new ArrayList<>(wls.size());
+        CodeCoverage.run("updateTileImprovementPlans");
         for (WorkLocation wl : wls) {
+            CodeCoverage.run("updateTileImprovementPlans");
             Tile workTile = wl.getWorkTile();
             ColonyTile colonyTile = (ColonyTile)wl;
             if (workTile.getOwningSettlement() != colony
-                || getPlanFor(workTile, newPlans) != null) continue;
+                || getPlanFor(workTile, newPlans) != null) {CodeCoverage.run("updateTileImprovementPlans");continue;};
 
+            CodeCoverage.run("updateTileImprovementPlans");
             // Require food for the center tile, but otherwise insist
             // the tile is being used, and try to improve the
             // production that is underway.
             GoodsType goodsType;
             if (colonyTile.isColonyCenterTile()) {
+                CodeCoverage.run("updateTileImprovementPlans");
                 AbstractGoods food = find(wl.getProduction(),
                                           AbstractGoods::isFoodType);
                 goodsType = (food == null) ? null : food.getType();
             } else {
+                CodeCoverage.run("updateTileImprovementPlans");
                 goodsType = (wl.isEmpty()) ? null : wl.getCurrentWorkType();
             }
-            if (goodsType == null) continue;
+            CodeCoverage.run("updateTileImprovementPlans");
+            if (goodsType == null) {CodeCoverage.run("updateTileImprovementPlans"); continue;};
 
             TileImprovementPlan plan = getPlanFor(workTile,
                                                   tileImprovementPlans);
+            CodeCoverage.run("updateTileImprovementPlans");
             if (plan == null) {
+                CodeCoverage.run("updateTileImprovementPlans");
                 TileImprovementType type = TileImprovementPlan
                     .getBestTileImprovementType(workTile, goodsType);
                 if (type != null) {
+                    CodeCoverage.run("updateTileImprovementPlans");
                     plan = new TileImprovementPlan(getAIMain(), workTile,
                         type, type.getImprovementValue(workTile, goodsType));
                 }
+                CodeCoverage.run("updateTileImprovementPlans");
             } else {
-                if (!plan.update(goodsType)) plan = null;
+                CodeCoverage.run("updateTileImprovementPlans");
+                if (!plan.update(goodsType)) {CodeCoverage.run("updateTileImprovementPlans"); plan = null;};
+                CodeCoverage.run("updateTileImprovementPlans");
             }
-            if (plan == null) continue;
+            CodeCoverage.run("updateTileImprovementPlans");
+            if (plan == null) {CodeCoverage.run("updateTileImprovementPlans"); continue; };
+            CodeCoverage.run("updateTileImprovementPlans");
 
             // Defend against clearing the last forested tile.
             TileType change = plan.getType().getChange(workTile.getType());
@@ -1285,19 +1301,25 @@ public final class AIColony extends AIObject implements PropertyChangeListener {
                 && !change.isForested()
                 && !colonyTile.isColonyCenterTile()
                 && count(colony.getAvailableWorkLocations(), forestPred)
-                    <= FOREST_MINIMUM) continue;
+                    <= FOREST_MINIMUM) {CodeCoverage.run("updateTileImprovementPlans"); continue;};
 
+            CodeCoverage.run("updateTileImprovementPlans");
             newPlans.add(plan); // Otherwise add the plan.
         }
+        CodeCoverage.run("updateTileImprovementPlans");
         clearTileImprovementPlans();
         tileImprovementPlans.addAll(newPlans);
         tileImprovementPlans.sort(ValuedAIObject.descendingValueComparator);
         if (!tileImprovementPlans.isEmpty()) {
+            CodeCoverage.run("updateTileImprovementPlans");
             lb.add(", improve:");
             for (TileImprovementPlan tip : tileImprovementPlans) {
+                CodeCoverage.run("updateTileImprovementPlans");
                 lb.add(" ", tip.getTarget(), "-", tip.getType().getSuffix());
             }
+            CodeCoverage.run("updateTileImprovementPlans");
         }
+        CodeCoverage.run("updateTileImprovementPlans");
     }
 
     /**
