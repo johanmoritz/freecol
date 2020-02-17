@@ -1262,6 +1262,8 @@ public class Map extends FreeColGameObject implements Location {
                         > carrierPath.getLastNode().getCost()))) {
                 CodeCoverage.run("findMapPath");
                 path = carrierPath;
+            } else {
+                CodeCoverage.run("findMapPath");
             }
 
         } else if (offMapUnit != null) {
@@ -1298,6 +1300,8 @@ public class Map extends FreeColGameObject implements Location {
                 PathNode last = path.getLastNode();
                 last.next = new PathNode(embarkTo, 0, last.getTurns()+1, true,
                     last, null);
+            } else {
+                CodeCoverage.run("findMapPath");
             }
         } else { // Otherwise, there is a connectivity failure.
             CodeCoverage.run("findMapPath");
