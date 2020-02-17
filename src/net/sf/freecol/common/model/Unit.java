@@ -49,6 +49,8 @@ import static net.sf.freecol.common.util.CollectionUtils.*;
 import net.sf.freecol.common.util.LogBuilder;
 import static net.sf.freecol.common.util.StringUtils.*;
 
+import net.sf.freecol.common.debug.CodeCoverage;
+
 
 /**
  * Represents all pieces that can be moved on the map-board. This includes:
@@ -4091,15 +4093,21 @@ public class Unit extends GoodsLocation
         // It is possible to add a unit to a non-specific location
         // within a colony by specifying the colony as the new
         // location.  Colony.joinColony handles this special case.
+        CodeCoverage.run("setLocation");
         if (newLocation instanceof Colony) {
+            CodeCoverage.run("setLocation");
             return ((Colony)newLocation).joinColony(this);
         }
+        CodeCoverage.run("setLocation");
 
-        if (newLocation == this.location) return true;
+        if (newLocation == this.location) { CodeCoverage.run("setLocation"); return true; }
+        CodeCoverage.run("setLocation");
         if (newLocation != null && !newLocation.canAdd(this)) {
+            CodeCoverage.run("setLocation");
             logger.warning("Can not add " + this + " to " + newLocation);
             return false;
         }
+        CodeCoverage.run("setLocation");
 
         // If the unit either starts or ends this move in a colony
         // then teaching status can change.  However, if it moves
@@ -4117,38 +4125,54 @@ public class Unit extends GoodsLocation
                 == ((WorkLocation)newLocation).canTeach());
 
         // First disable education that will fail due to the move.
+        CodeCoverage.run("setLocation");
         if (oldColony != null && !preserveEducation) {
+            CodeCoverage.run("setLocation");
             oldColony.updateEducation(this, false);
         }
 
+        CodeCoverage.run("setLocation");
+
         // Move out of the old location.
         if (this.location == null) {
+            CodeCoverage.run("setLocation");
             ; // do nothing
         } else if (!this.location.remove(this)) {//-vis
             // "Should not happen" (should always be able to remove)
+            CodeCoverage.run("setLocation");
             throw new RuntimeException("Failed to remove " + this
                 + " from " + this.location.getId());
         }
+        CodeCoverage.run("setLocation");
 
         // Move in to the new location.
         if (newLocation == null) {
+            CodeCoverage.run("setLocation");
             setLocationNoUpdate(null);//-vis
         } else if (!newLocation.add(this)) {//-vis
             // "Should not happen" (canAdd was checked above)
+            CodeCoverage.run("setLocation");
             throw new RuntimeException("Failed to add "
                 + this + " to " + newLocation.getId());
         }
+        CodeCoverage.run("setLocation");
 
         // See if education needs to be re-enabled.
         if (newColony != null && !preserveEducation) {
+            CodeCoverage.run("setLocation");
             newColony.updateEducation(this, true);
         }
 
+        CodeCoverage.run("setLocation");
+
         // Update population of any colonies involved.
         if (!withinColony) {
-            if (oldColony != null) oldColony.updatePopulation();
-            if (newColony != null) newColony.updatePopulation();
+            CodeCoverage.run("setLocation");
+            if (oldColony != null) { CodeCoverage.run("setLocation"); oldColony.updatePopulation();};
+            CodeCoverage.run("setLocation");
+            if (newColony != null) {CodeCoverage.run("setLocation"); newColony.updatePopulation();};
         }
+        CodeCoverage.run("setLocation");
         return true;
     }
 
