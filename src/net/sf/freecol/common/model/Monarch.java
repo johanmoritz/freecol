@@ -28,6 +28,7 @@ import java.util.logging.Logger;
 
 import javax.xml.stream.XMLStreamException;
 
+import net.sf.freecol.common.debug.CodeCoverage;
 import net.sf.freecol.common.io.FreeColXMLReader;
 import net.sf.freecol.common.io.FreeColXMLWriter;
 import static net.sf.freecol.common.model.Constants.*;
@@ -378,39 +379,55 @@ public final class Monarch extends FreeColGameObject implements Named {
      * @return True if the action is valid.
      */
     public boolean actionIsValid(MonarchAction action) {
+        CodeCoverage.run("actionIsValid");
         initializeCaches();
 
         switch (action) {
-        case NO_ACTION:
-            return true;
-        case RAISE_TAX_ACT: case RAISE_TAX_WAR:
-            return player.getTax() < taxMaximum();
-        case FORCE_TAX:
-            return false;
-        case LOWER_TAX_WAR: case LOWER_TAX_OTHER:
-            return player.getTax() > MINIMUM_TAX_RATE + 10;
-        case WAIVE_TAX:
-            return true;
-        case ADD_TO_REF:
-            return !navalREFUnitTypes.isEmpty() && !landREFUnitTypes.isEmpty();
-        case DECLARE_PEACE:
-            return !collectPotentialFriends().isEmpty();
-        case DECLARE_WAR:
-            return !collectPotentialEnemies().isEmpty();
-        case SUPPORT_SEA:
-            return player.getAttackedByPrivateers() && !getSupportSea()
-                && !getDispleasure();
-        case SUPPORT_LAND: case MONARCH_MERCENARIES:
-            return player.isAtWar() && !getDispleasure()
-                && player.hasSettlements();
-        case HESSIAN_MERCENARIES:
-            return player.checkGold(HESSIAN_MINIMUM_PRICE)
-                && player.hasSettlements();
-        case DISPLEASURE:
-            return false;
-        default:
-            throw new IllegalArgumentException("Bogus monarch action: "
-                                               + action);
+            case NO_ACTION:
+                CodeCoverage.run("actionIsValid");
+                return true;
+            case RAISE_TAX_ACT: case RAISE_TAX_WAR:
+                CodeCoverage.run("actionIsValid");
+                return player.getTax() < taxMaximum();
+            case FORCE_TAX:
+                CodeCoverage.run("actionIsValid");
+                return false;
+            case LOWER_TAX_WAR: case LOWER_TAX_OTHER:
+                CodeCoverage.run("actionIsValid");
+                return player.getTax() > MINIMUM_TAX_RATE + 10;
+            case WAIVE_TAX:
+                CodeCoverage.run("actionIsValid");
+                return true;
+            case ADD_TO_REF:
+                CodeCoverage.run("actionIsValid");
+                return !navalREFUnitTypes.isEmpty() && !landREFUnitTypes.isEmpty();
+            case DECLARE_PEACE:
+                CodeCoverage.run("actionIsValid");
+                return !collectPotentialFriends().isEmpty();
+            case DECLARE_WAR:
+                CodeCoverage.run("actionIsValid");
+                return !collectPotentialEnemies().isEmpty();
+            case SUPPORT_SEA:
+                CodeCoverage.run("actionIsValid");
+                return player.getAttackedByPrivateers() && !getSupportSea()
+                    && !getDispleasure();
+            case SUPPORT_LAND: 
+                CodeCoverage.run("actionIsValid");
+            case MONARCH_MERCENARIES:
+                CodeCoverage.run("actionIsValid");
+                return player.isAtWar() && !getDispleasure()
+                    && player.hasSettlements();
+            case HESSIAN_MERCENARIES:
+                CodeCoverage.run("actionIsValid");
+                return player.checkGold(HESSIAN_MINIMUM_PRICE)
+                    && player.hasSettlements();
+            case DISPLEASURE:
+                CodeCoverage.run("actionIsValid");
+                return false;
+            default:
+                CodeCoverage.run("actionIsValid");
+                throw new IllegalArgumentException("Bogus monarch action: "
+                                                + action);
         }
     }
 
