@@ -23,6 +23,7 @@ import java.util.logging.Logger;
 
 import javax.xml.stream.XMLStreamException;
 
+import net.sf.freecol.common.debug.CodeCoverage;
 import net.sf.freecol.common.io.FreeColXMLReader;
 import net.sf.freecol.common.model.FreeColSpecObject;
 import net.sf.freecol.common.model.Specification;
@@ -208,72 +209,95 @@ public abstract class AbstractOption<T> extends FreeColSpecObject
      */
     protected AbstractOption readOption(FreeColXMLReader xr)
         throws XMLStreamException {
+        CodeCoverage.run("AbstractOption");
         final Specification spec = getSpecification();
         final String tag = xr.getLocalName();
         AbstractOption option = null;
 
         if (ACTION_TAG.equals(tag)) {
+            CodeCoverage.run("AbstractOption");
             // FIXME: load FreeColActions from client options?
             // logger.finest("Skipping action " + xr.readId());
             xr.nextTag();
 
         } else if (AbstractUnitOption.TAG.equals(tag)) {
+            CodeCoverage.run("AbstractOption");
             option = new AbstractUnitOption(spec);
 
         } else if (AudioMixerOption.TAG.equals(tag)) {
+            CodeCoverage.run("AbstractOption");
             option = new AudioMixerOption(spec);
 
         } else if (BooleanOption.TAG.equals(tag)) {
+            CodeCoverage.run("AbstractOption");
             option = new BooleanOption(spec);
 
         } else if (FileOption.TAG.equals(tag)) {
+            CodeCoverage.run("AbstractOption");
             option = new FileOption(spec);
 
         } else if (IntegerOption.TAG.equals(tag)) {
+            CodeCoverage.run("AbstractOption");
             option = new IntegerOption(spec);
 
         } else if (LanguageOption.TAG.equals(tag)) {
+            CodeCoverage.run("AbstractOption");
             option = new LanguageOption(spec);
 
         } else if (ModListOption.TAG.equals(tag)) {
+            CodeCoverage.run("AbstractOption");
             option = new ModListOption(spec);
 
         } else if (ModOption.TAG.equals(tag)) {
+            CodeCoverage.run("AbstractOption");
             option = new ModOption(spec);
 
         } else if (OptionGroup.TAG.equals(tag)) {
+            CodeCoverage.run("AbstractOption");
             option = new OptionGroup(spec);
 
         } else if (PercentageOption.TAG.equals(tag)) {
+            CodeCoverage.run("AbstractOption");
             option = new PercentageOption(spec);
 
         } else if (RangeOption.TAG.equals(tag)) {
+            CodeCoverage.run("AbstractOption");
             option = new RangeOption(spec);
 
         } else if (SelectOption.TAG.equals(tag)) {
+            CodeCoverage.run("AbstractOption");
             option = new SelectOption(spec);
 
         } else if (StringOption.TAG.equals(tag)) {
+            CodeCoverage.run("AbstractOption");
             option = new StringOption(spec);
 
         } else if (UnitListOption.TAG.equals(tag)) {
+            CodeCoverage.run("AbstractOption");
             option = new UnitListOption(spec);
 
         } else if (UnitTypeOption.TAG.equals(tag)) {
+            CodeCoverage.run("AbstractOption");
             option = new UnitTypeOption(spec);
 
         } else if (TextOption.TAG.equals(tag)) {
+            CodeCoverage.run("AbstractOption");
             option = new TextOption(spec);
 
         } else {
+            CodeCoverage.run("AbstractOption");
             logger.warning("Not an option type: " + tag);
             xr.nextTag();
         }
 
         if (option != null) {
+            CodeCoverage.run("AbstractOption");
             option.readFromXML(xr);
             option.generateChoices();
+        } else {
+            CodeCoverage.run("AbstractOption");
         }
+        
         return option;
     }
 }
