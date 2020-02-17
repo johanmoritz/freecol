@@ -27,6 +27,7 @@ import java.util.List;
 import javax.xml.stream.XMLStreamException;
 
 import net.sf.freecol.client.gui.panel.Utility;
+import net.sf.freecol.common.debug.CodeCoverage;
 import net.sf.freecol.common.i18n.Messages;
 import net.sf.freecol.common.io.FreeColXMLReader;
 import net.sf.freecol.common.io.FreeColXMLWriter;
@@ -289,32 +290,57 @@ public class ModelMessage extends StringTemplate {
         FreeColObject o = null;
         switch (messageType) {
         case SONS_OF_LIBERTY:
+            CodeCoverage.run("getDefaultDisplay");
         case GOVERNMENT_EFFICIENCY:
+            CodeCoverage.run("getDefaultDisplay");
             o = source.getSpecification().getGoodsType("model.goods.bells");
             break;
         case UNIT_IMPROVED:
+            CodeCoverage.run("getDefaultDisplay");
         case UNIT_DEMOTED:
+            CodeCoverage.run("getDefaultDisplay");
         case UNIT_LOST:
+            CodeCoverage.run("getDefaultDisplay");
         case UNIT_ADDED:
+            CodeCoverage.run("getDefaultDisplay");
         case LOST_CITY_RUMOUR:
+            CodeCoverage.run("getDefaultDisplay");
         case COMBAT_RESULT:
+            CodeCoverage.run("getDefaultDisplay");
         case DEMANDS:
+            CodeCoverage.run("getDefaultDisplay");
         case GOODS_MOVEMENT:
+            CodeCoverage.run("getDefaultDisplay");
             o = source;
             break;
         case BUILDING_COMPLETED:
+            CodeCoverage.run("getDefaultDisplay");
             o = source.getSpecification().getGoodsType("model.goods.hammers");
             break;
         case DEFAULT:
+            CodeCoverage.run("getDefaultDisplay");
         case WARNING:
+            CodeCoverage.run("getDefaultDisplay");
         case WAREHOUSE_CAPACITY:
+            CodeCoverage.run("getDefaultDisplay");
         case FOREIGN_DIPLOMACY:
+            CodeCoverage.run("getDefaultDisplay");
         case MARKET_PRICES:
+            CodeCoverage.run("getDefaultDisplay");
         case MISSING_GOODS:
+            CodeCoverage.run("getDefaultDisplay");
         case TUTORIAL:
+            CodeCoverage.run("getDefaultDisplay");
         case GIFT_GOODS:
+            CodeCoverage.run("getDefaultDisplay");
         default:
-            if (source instanceof Player) o = source;
+            CodeCoverage.run("getDefaultDisplay");
+            if (source instanceof Player) {
+                CodeCoverage.run("getDefaultDisplay");
+                o = source;
+            } else {
+                CodeCoverage.run("getDefaultDisplay");
+            }
             break;
         }
         return o;
