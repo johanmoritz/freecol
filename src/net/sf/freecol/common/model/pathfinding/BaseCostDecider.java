@@ -61,7 +61,9 @@ class BaseCostDecider implements CostDecider {
               
         Tile oldTile = oldLocation.getTile();
         Tile newTile = newLocation.getTile();
-        if (oldLocation instanceof Europe) { // Coming from Europe
+        if (oldLocation instanceof Europe) {
+            CodeCoverage.run("getCost");
+            // Coming from Europe
             if (newLocation instanceof Europe
                 || newTile == null
                 || !newTile.isDirectlyHighSeasConnected()
@@ -99,6 +101,7 @@ class BaseCostDecider implements CostDecider {
         } else { // Moving between tiles
             // Disallow illegal moves.
             // Special moves and moving off a carrier consume a whole turn.
+            CodeCoverage.run("getCost");
             boolean consumeMove = false;
             switch (unit.getSimpleMoveType(oldTile, newTile)) {
             case MOVE_HIGH_SEAS:
