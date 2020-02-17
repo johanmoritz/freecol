@@ -4507,7 +4507,6 @@ public class Player extends FreeColGameObject implements Nameable {
      */
     @Override
     protected void readChild(FreeColXMLReader xr) throws XMLStreamException {
-        CodeCoverage.run("readChild");
         final Specification spec = getSpecification();
         final Game game = getGame();
         final String tag = xr.getLocalName();

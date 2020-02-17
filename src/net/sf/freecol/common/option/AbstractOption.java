@@ -209,7 +209,6 @@ public abstract class AbstractOption<T> extends FreeColSpecObject
      */
     protected AbstractOption readOption(FreeColXMLReader xr)
         throws XMLStreamException {
-        CodeCoverage.run("AbstractOption");
         final Specification spec = getSpecification();
         final String tag = xr.getLocalName();
         AbstractOption option = null;
@@ -297,7 +296,7 @@ public abstract class AbstractOption<T> extends FreeColSpecObject
         } else {
             CodeCoverage.run("AbstractOption");
         }
-        
+
         return option;
     }
 }

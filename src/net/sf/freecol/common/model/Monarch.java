@@ -410,7 +410,6 @@ public final class Monarch extends FreeColGameObject implements Named {
      * @return True if the action is valid.
      */
     public boolean actionIsValid(MonarchAction action) {
-        CodeCoverage.run("actionIsValid");
         initializeCaches();
 
         switch (action) {
