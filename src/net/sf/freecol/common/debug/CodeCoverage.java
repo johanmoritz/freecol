@@ -4,29 +4,31 @@ import java.util.logging.Logger;
 import java.util.HashMap;
 
 public class CodeCoverage {
-  public static HashMap<String, HashMap<Integer, Integer>> functions = new HashMap<String, HashMap<Integer, Integer>>();
+  public static Logger logger = Logger.getLogger(CodeCoverage.class.getName());
+  public static HashMap<String, HashMap<Integer, Integer>> functions = new HashMap<>();
   public static void run(String functionName) {
     int lineNumber = getLineNumber();
-    HashMap<Integer, Integer> functionEntries = CodeCoverage.functions.getOrDefault(functionName, new HashMap<Integer, Integer>());
+    HashMap<Integer, Integer> functionEntries = CodeCoverage.functions.getOrDefault(functionName, new HashMap<>());
     int touches = functionEntries.getOrDefault(lineNumber, 1);
     functionEntries.put(lineNumber, touches + 1);
     CodeCoverage.functions.put(functionName, functionEntries);
   }
 
   public static void print() {
-    Logger logger = Logger.getLogger(CodeCoverage.class.getName());
-    logger.info(CodeCoverage.functions.keySet().size() + " functions were tested");
-    for (String function : CodeCoverage.functions.keySet()) {
-      logger.info(function + "()");
-      HashMap<Integer, Integer> functionEntries = CodeCoverage.functions.get(function);
-      logger.info(functionEntries.size() + "branch(es) were tested");
-      logger.info("The following branches were run: (line nr, #runs)");
-      
-      for (int lineNumber : functionEntries.keySet()) { 
-        logger.info("(" + lineNumber + ", " + functionEntries.get(lineNumber) + ")");
+      logger.info("mobergliuslefors CodeCoverage tool\n" + CodeCoverage.functions.keySet().size() + " functions were tested");
+      StringBuilder sb = new StringBuilder();
+      for (String function : CodeCoverage.functions.keySet()) {
+          sb.append(function).append("()\n");
+          HashMap<Integer, Integer> functionEntries = CodeCoverage.functions.get(function);
+          sb.append(functionEntries.size()).append(" branch(es) were tested\n");
+          sb.append("The following branches were run: (line nr, #runs)\n");
+
+          for (int lineNumber : functionEntries.keySet()) {
+              sb.append("(").append(lineNumber).append(", ").append(functionEntries.get(lineNumber)).append(")\n");
+          }
+          logger.info(sb.toString().trim());
+          sb.setLength(0);
       }
-      
-    }
   }
 
 /** @return The line number of the code that ran this method
