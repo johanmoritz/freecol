@@ -302,7 +302,12 @@ public final class Monarch extends FreeColGameObject implements Named {
      * Cache the unit types and roles for support and mercenary offers.
      */
     private void initializeCaches() {
-        if (navalTypes != null) return;
+        if (navalTypes != null){
+            CodeCoverage.run("initializeCaches");
+            return;
+        }else{
+            CodeCoverage.run("initializeCaches");
+        }
         final Specification spec = getSpecification();
         navalTypes = new ArrayList<>();
         bombardTypes = new ArrayList<>();
@@ -312,39 +317,65 @@ public final class Monarch extends FreeColGameObject implements Named {
         landREFUnitTypes = spec.getREFUnitTypes(false);
 
         for (UnitType unitType : spec.getUnitTypeList()) {
+            CodeCoverage.run("initializeCaches");
             if (unitType.hasAbility(Ability.SUPPORT_UNIT)) {
                 if (unitType.hasAbility(Ability.NAVAL_UNIT)) {
+                    CodeCoverage.run("initializeCaches");
                     navalTypes.add(unitType);
                 } else if (unitType.hasAbility(Ability.BOMBARD)) {
+                    CodeCoverage.run("initializeCaches");
                     bombardTypes.add(unitType);
                 } else if (unitType.hasAbility(Ability.CAN_BE_EQUIPPED)) {
+                    CodeCoverage.run("initializeCaches");
                     landTypes.add(unitType);
+                }else{
+                    CodeCoverage.run("initializeCaches");
                 }
+                CodeCoverage.run("initializeCaches");
+            }else{
+                CodeCoverage.run("initializeCaches");
             }
             if (unitType.hasAbility(Ability.MERCENARY_UNIT)) {
+                CodeCoverage.run("initializeCaches");
                 mercenaryTypes.add(unitType);
+            }else{
+                CodeCoverage.run("initializeCaches");
             }
         }
+        CodeCoverage.run("initializeCaches");
         for (Role r : spec.getMilitaryRolesList()) {
+            CodeCoverage.run("initializeCaches");
             boolean ok = r.isAvailableTo(player, first(landTypes));
             boolean armed = r.hasAbility(Ability.ARMED);
             boolean mounted = r.hasAbility(Ability.MOUNTED);
             boolean ref = r.requiresAbility(Ability.REF_UNIT);
             if (armed && mounted) {
+                CodeCoverage.run("initializeCaches");
                 if (ok && !ref && mountedRole == null) {
+                    CodeCoverage.run("initializeCaches");
                     mountedRole = r;
                 } else if (!ok && ref && refMountedRole == null) {
+                    CodeCoverage.run("initializeCaches");
                     refMountedRole = r;
+                }else{
+                    CodeCoverage.run("initializeCaches");
                 }
             } else if (armed && !mounted) {
+                CodeCoverage.run("initializeCaches");
                 if (ok && !ref && armedRole == null) {
+                    CodeCoverage.run("initializeCaches");
                     armedRole = r;
                 } else if (!ok && ref && refArmedRole == null) {
+                    CodeCoverage.run("initializeCaches");
                     refArmedRole = r;
+                }else{
+                    CodeCoverage.run("initializeCaches");
                 }
+            }else{
+                CodeCoverage.run("initializeCaches");
             }
         }
-
+        CodeCoverage.run("initializeCaches");
     }
 
     /**
