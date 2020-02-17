@@ -4246,21 +4246,31 @@ public class Player extends FreeColGameObject implements Nameable {
 
 
         if (xw.validFor(this)) {
-
-            if (market != null) market.toXML(xw);
+            CodeCoverage.run("writeChildren");
+            if (market != null) { 
+                CodeCoverage.run("writeChildren");
+                market.toXML(xw);
+            } else {
+                CodeCoverage.run("writeChildren");
+            }
 
             for (Ability ability : transform(getSortedAbilities(),
                                              Ability::isIndependent)) {
+                CodeCoverage.run("writeChildren");
                 ability.toXML(xw);
             }
+            CodeCoverage.run("writeChildren");
 
             Turn turn = getGame().getTurn();
             for (Modifier modifier : transform(getSortedModifiers(), m ->
                     m.isTemporary() && !m.isOutOfDate(turn))) {
+                CodeCoverage.run("writeChildren");
                 modifier.toXML(xw);
             }
+            CodeCoverage.run("writeChildren");
 
             for (Player p : sort(tension.keySet())) {
+                CodeCoverage.run("writeChildren");
                 xw.writeStartElement(TENSION_TAG);
 
                 xw.writeAttribute(PLAYER_TAG, p);
@@ -4269,20 +4279,32 @@ public class Player extends FreeColGameObject implements Nameable {
 
                 xw.writeEndElement();
             }
+            CodeCoverage.run("writeChildren");
             
             if (bannedMissions != null) {
+                CodeCoverage.run("writeChildren");
                 for (Player p : sort(bannedMissions)) {
+                    CodeCoverage.run("writeChildren");
                     xw.writeStartElement(BAN_MISSIONS_TAG);
 
                     xw.writeAttribute(PLAYER_TAG, p.getId());
 
                     xw.writeEndElement();
                 }
+                CodeCoverage.run("writeChildren");
+            } else {
+                CodeCoverage.run("writeChildren");
             }
 
             for (Entry<String, Stance> e : mapEntriesByKey(stance)) {
+                CodeCoverage.run("writeChildren");
                 Stance s = e.getValue();
-                if (s == Stance.UNCONTACTED) continue;
+                if (s == Stance.UNCONTACTED) {
+                    CodeCoverage.run("writeChildren");    
+                    continue;
+                } else {
+                    CodeCoverage.run("writeChildren");
+                }
 
                 xw.writeStartElement(STANCE_TAG);
 
@@ -4292,34 +4314,61 @@ public class Player extends FreeColGameObject implements Nameable {
 
                 xw.writeEndElement();
             }
+            CodeCoverage.run("writeChildren");
 
             for (HistoryEvent event : getHistory()) { // Already in order
+                CodeCoverage.run("writeChildren");
                 event.toXML(xw);
             }
+            CodeCoverage.run("writeChildren");
 
             for (TradeRoute route : sort(getTradeRoutes())) {
+                CodeCoverage.run("writeChildren");
                 route.toXML(xw);
             }
+            CodeCoverage.run("writeChildren");
 
             xw.writeToListElement(FOUNDING_FATHERS_TAG, foundingFathers);
 
             xw.writeToListElement(OFFERED_FATHERS_TAG, offeredFathers);
 
-            if (europe != null) europe.toXML(xw);
-
-            if (monarch != null) monarch.toXML(xw);
-
-            if (highSeas != null) highSeas.toXML(xw);
-            
-            for (ModelMessage m : getModelMessages()) m.toXML(xw);
+            if (europe != null) {
+                CodeCoverage.run("writeChildren");
+                europe.toXML(xw);
+            } else {
+                CodeCoverage.run("writeChildren");
+            }
+            if (monarch != null) {
+                CodeCoverage.run("writeChildren");
+                monarch.toXML(xw);               
+            } else {
+                CodeCoverage.run("writeChildren");
+            }
+            if (highSeas != null) {
+                CodeCoverage.run("writeChildren");
+                highSeas.toXML(xw);
+            } else {
+                CodeCoverage.run("writeChildren");
+            }
+            for (ModelMessage m : getModelMessages()) {
+                CodeCoverage.run("writeChildren");
+                m.toXML(xw);
+            }
+            CodeCoverage.run("writeChildren");
 
             if (lastSales != null) {
+                CodeCoverage.run("writeChildren");
                 for (LastSale ls : sort(lastSales.values())) {
+                    CodeCoverage.run("writeChildren");
                     ls.toXML(xw);
                 }
+                CodeCoverage.run("writeChildren");
+            } else {
+                CodeCoverage.run("writeChildren");
             }
 
         } else {
+            CodeCoverage.run("writeChildren");
             Player player = xw.getClientPlayer();
             Tension t = getTension(player);
             xw.writeStartElement(TENSION_TAG);
@@ -4331,15 +4380,19 @@ public class Player extends FreeColGameObject implements Nameable {
             xw.writeEndElement();
 
             if (missionsBanned(player)) {
+                CodeCoverage.run("writeChildren");
                 xw.writeStartElement(BAN_MISSIONS_TAG);
 
                 xw.writeAttribute(PLAYER_TAG, player.getId());
 
                 xw.writeEndElement();
+            } else {
+                CodeCoverage.run("writeChildren");
             }
 
             Stance s = getStance(player);
             if (s != null && s != Stance.UNCONTACTED) {
+                CodeCoverage.run("writeChildren");
                 xw.writeStartElement(STANCE_TAG);
                 
                 xw.writeAttribute(PLAYER_TAG, player);
@@ -4347,6 +4400,8 @@ public class Player extends FreeColGameObject implements Nameable {
                 xw.writeAttribute(VALUE_TAG, s);
 
                 xw.writeEndElement();
+            } else {
+                CodeCoverage.run("writeChildren");
             }
         }
     }
