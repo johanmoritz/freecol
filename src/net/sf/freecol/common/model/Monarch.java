@@ -386,13 +386,17 @@ public final class Monarch extends FreeColGameObject implements Named {
             case NO_ACTION:
                 CodeCoverage.run("actionIsValid");
                 return true;
-            case RAISE_TAX_ACT: case RAISE_TAX_WAR:
+            case RAISE_TAX_ACT: 
+                CodeCoverage.run("actionIsValid");
+            case RAISE_TAX_WAR:
                 CodeCoverage.run("actionIsValid");
                 return player.getTax() < taxMaximum();
             case FORCE_TAX:
                 CodeCoverage.run("actionIsValid");
                 return false;
-            case LOWER_TAX_WAR: case LOWER_TAX_OTHER:
+            case LOWER_TAX_WAR: 
+                CodeCoverage.run("actionIsValid");
+            case LOWER_TAX_OTHER:
                 CodeCoverage.run("actionIsValid");
                 return player.getTax() > MINIMUM_TAX_RATE + 10;
             case WAIVE_TAX:
