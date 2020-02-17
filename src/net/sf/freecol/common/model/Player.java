@@ -40,6 +40,7 @@ import java.util.stream.Stream;
 
 import javax.xml.stream.XMLStreamException;
 
+import net.sf.freecol.common.debug.CodeCoverage;
 import net.sf.freecol.common.debug.FreeColDebugger;
 import net.sf.freecol.common.i18n.Messages;
 import net.sf.freecol.common.i18n.NameCache;
@@ -4451,31 +4452,52 @@ public class Player extends FreeColGameObject implements Nameable {
      */
     @Override
     protected void readChild(FreeColXMLReader xr) throws XMLStreamException {
+        CodeCoverage.run("readChild");
         final Specification spec = getSpecification();
         final Game game = getGame();
         final String tag = xr.getLocalName();
 
         if (BAN_MISSIONS_TAG.equals(tag)) {
+            CodeCoverage.run("readChild");
             Player player = xr.makeFreeColObject(game, PLAYER_TAG,
                                                  Player.class, true);
-            if (player != null && player.isEuropean()) addMissionBan(player);
+            if (player != null) {
+                CodeCoverage.run("readChild");
+                if (player.isEuropean()) {
+                    CodeCoverage.run("readChild");
+                    addMissionBan(player);
+                } else {
+                    CodeCoverage.run("readChild");
+                }
+            } else {
+                CodeCoverage.run("readChild");
+            }
+
             xr.closeTag(BAN_MISSIONS_TAG);
 
         } else if (FOUNDING_FATHERS_TAG.equals(tag)) {
+            CodeCoverage.run("readChild");
             List<FoundingFather> ffs = xr.readList(spec, FOUNDING_FATHERS_TAG,
                                                    FoundingFather.class);
             if (ffs != null) {
+                CodeCoverage.run("readChild");
                 for (FoundingFather ff : ffs) {
+                    CodeCoverage.run("readChild");
                     addFather(ff); // addFather adds the features
                 }
+                CodeCoverage.run("readChild");
+            } else {
+                CodeCoverage.run("readChild");
             }
         
         } else if (OFFERED_FATHERS_TAG.equals(tag)) {
+            CodeCoverage.run("readChild");
             List<FoundingFather> ofs = xr.readList(spec, OFFERED_FATHERS_TAG,
                                                    FoundingFather.class);
             offeredFathers.addAll(ofs);
 
         } else if (STANCE_TAG.equals(tag)) {
+            CodeCoverage.run("readChild");
             Player player = xr.makeFreeColObject(game, PLAYER_TAG,
                                                  Player.class, true);
             stance.put(player.getId(),
@@ -4483,44 +4505,67 @@ public class Player extends FreeColGameObject implements Nameable {
             xr.closeTag(STANCE_TAG);
 
         } else if (TENSION_TAG.equals(tag)) {
+            CodeCoverage.run("readChild");
             tension.put(xr.makeFreeColObject(game, PLAYER_TAG,
                                              Player.class, true),
                         new Tension(xr.getAttribute(VALUE_TAG, 0)));
             xr.closeTag(TENSION_TAG);
         
         } else if (Ability.TAG.equals(tag)) {
+            CodeCoverage.run("readChild");
             Ability ability = new Ability(xr, spec);
-            if (ability.isIndependent()) addAbility(ability);
+            if (ability.isIndependent()) {
+                CodeCoverage.run("readChild");
+                addAbility(ability);
+            } else {
+                CodeCoverage.run("readChild");
+            }
 
         } else if (Europe.TAG.equals(tag)) {
+            CodeCoverage.run("readChild");
             europe = xr.readFreeColObject(game, Europe.class);
 
         } else if (HighSeas.TAG.equals(tag)) {
+            CodeCoverage.run("readChild");
             highSeas = xr.readFreeColObject(game, HighSeas.class);
 
         } else if (HistoryEvent.TAG.equals(tag)) {
+            CodeCoverage.run("readChild");
             addHistory(new HistoryEvent(xr));
 
         } else if (LastSale.TAG.equals(tag)) {
+            CodeCoverage.run("readChild");
             addLastSale(new LastSale(xr));
 
         } else if (Market.TAG.equals(tag)) {
+            CodeCoverage.run("readChild");
             market = xr.readFreeColObject(game, Market.class);
 
         } else if (ModelMessage.TAG.equals(tag)) {
+            CodeCoverage.run("readChild");
             addModelMessage(new ModelMessage(xr));
 
         } else if (Modifier.TAG.equals(tag)) {
+            CodeCoverage.run("readChild");
             Modifier modifier = new Modifier(xr, spec);
-            if (modifier.isIndependent()) addModifier(modifier);
+
+            if (modifier.isIndependent()) { 
+                CodeCoverage.run("readChild");
+                addModifier(modifier);
+            } else {
+                CodeCoverage.run("readChild");
+            }
 
         } else if (Monarch.TAG.equals(tag)) {
+            CodeCoverage.run("readChild");
             monarch = xr.readFreeColObject(game, Monarch.class);
 
         } else if (TradeRoute.TAG.equals(tag)) {
+            CodeCoverage.run("readChild");
             addTradeRoute(xr.readFreeColObject(game, TradeRoute.class));
 
         } else {
+            CodeCoverage.run("readChild");
             super.readChild(xr);
         }
     }
