@@ -4,18 +4,28 @@ import java.util.logging.Logger;
 import java.util.HashMap;
 
 public class CodeCoverage {
-  public static HashMap<Integer, Integer> touches = new HashMap<Integer, Integer>();
-  public static void run() {
+  public static HashMap<String, HashMap<Integer, Integer>> functions = new HashMap<String, HashMap<Integer, Integer>>();
+  public static void run(String functionName) {
     int lineNumber = getLineNumber();
-    int touches = CodeCoverage.touches.getOrDefault(lineNumber, 1);
-    CodeCoverage.touches.put(lineNumber, touches + 1);
+    HashMap<Integer, Integer> functionEntries = CodeCoverage.functions.getOrDefault(functionName, new HashMap<Integer, Integer>());
+    int touches = functionEntries.getOrDefault(lineNumber, 1);
+    functionEntries.put(lineNumber, touches + 1);
+    CodeCoverage.functions.put(functionName, functionEntries);
   }
 
   public static void print() {
     Logger logger = Logger.getLogger(CodeCoverage.class.getName());
-    logger.info(touches.size() + " line were touched.");
-    for (int lineNumber : CodeCoverage.touches.keySet()) { 
-      logger.info(lineNumber + "\t" + CodeCoverage.touches.get(lineNumber));
+    logger.info(CodeCoverage.functions.keySet().size() + " functions were tested");
+    for (String function : CodeCoverage.functions.keySet()) {
+      logger.info(function + "()");
+      HashMap<Integer, Integer> functionEntries = CodeCoverage.functions.get(function);
+      logger.info(functionEntries.size() + "branch(es) were tested");
+      logger.info("The following branches were run: (line nr, #runs)");
+      
+      for (int lineNumber : functionEntries.keySet()) { 
+        logger.info("(" + lineNumber + ", " + functionEntries.get(lineNumber) + ")");
+      }
+      
     }
   }
 
