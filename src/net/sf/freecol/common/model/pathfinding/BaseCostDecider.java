@@ -19,6 +19,7 @@
 
 package net.sf.freecol.common.model.pathfinding;
 
+import net.sf.freecol.common.debug.CodeCoverage;
 import net.sf.freecol.common.model.Europe;
 import net.sf.freecol.common.model.Location;
 import net.sf.freecol.common.model.Tile;
@@ -64,21 +65,35 @@ class BaseCostDecider implements CostDecider {
             if (newLocation instanceof Europe
                 || newTile == null
                 || !newTile.isDirectlyHighSeasConnected()
-                || !unit.getType().canMoveToHighSeas()) return ILLEGAL_MOVE;
+                || !unit.getType().canMoveToHighSeas()){
+                CodeCoverage.run("getCost");
+                return ILLEGAL_MOVE;
+            }else{
+                CodeCoverage.run("getCost");
+            }
             newTurns = unit.getSailTurns();
             movesLeft = unit.getInitialMovesLeft();
             cost = newTurns * unit.getInitialMovesLeft();
+            CodeCoverage.run("getCost");
 
         } else if (oldTile == null) {
+            CodeCoverage.run("getCost");
             return ILLEGAL_MOVE;
 
         } else if (newLocation instanceof Europe) { // Going to Europe
-            if (!unit.getType().canMoveToHighSeas()) return ILLEGAL_MOVE;
+            if (!unit.getType().canMoveToHighSeas()) {
+                CodeCoverage.run("getCost");
+                return ILLEGAL_MOVE;
+            }else{
+                CodeCoverage.run("getCost");
+            }
             newTurns = unit.getSailTurns();
             movesLeft = unit.getInitialMovesLeft();
             cost = newTurns * unit.getInitialMovesLeft();
+            CodeCoverage.run("getCost");
 
         } else if (newTile == null || !newTile.isExplored()) {
+            CodeCoverage.run("getCost");
             return ILLEGAL_MOVE;
 
         } else { // Moving between tiles
@@ -87,32 +102,51 @@ class BaseCostDecider implements CostDecider {
             boolean consumeMove = false;
             switch (unit.getSimpleMoveType(oldTile, newTile)) {
             case MOVE_HIGH_SEAS:
+                CodeCoverage.run("getCost");
                 break;
             case ATTACK_UNIT:
+                CodeCoverage.run("getCost");  
                 // Ignore hostile units in the base case, treating attacks
                 // as moves.
             case MOVE:
-                if (!unit.isOnCarrier()) break; // Fall through if disembarking.
+                CodeCoverage.run("getCost");
+                if (!unit.isOnCarrier()){
+                    CodeCoverage.run("getCost");
+                    break; // Fall through if disembarking.
+                }
             case ATTACK_SETTLEMENT:
+                CodeCoverage.run("getCost");
             case EXPLORE_LOST_CITY_RUMOUR:
+                CodeCoverage.run("getCost");
             case EMBARK:
+                CodeCoverage.run("getCost");
             case ENTER_INDIAN_SETTLEMENT_WITH_FREE_COLONIST:
+                CodeCoverage.run("getCost");
             case ENTER_INDIAN_SETTLEMENT_WITH_SCOUT:
+                CodeCoverage.run("getCost");
             case ENTER_INDIAN_SETTLEMENT_WITH_MISSIONARY:
+                CodeCoverage.run("getCost");
             case ENTER_FOREIGN_COLONY_WITH_SCOUT:
+                CodeCoverage.run("getCost");
             case ENTER_SETTLEMENT_WITH_CARRIER_AND_GOODS:
+                CodeCoverage.run("getCost");
                 consumeMove = true;
                 break;
             default:
+                CodeCoverage.run("getCost");
                 return ILLEGAL_MOVE;
             }
 
             cost = adjust(unit, oldTile, newTile, movesLeftBefore);
             if (consumeMove) {
+                CodeCoverage.run("getCost");
                 cost += this.movesLeft;
                 this.movesLeft = 0;
+            }else{
+                CodeCoverage.run("getCost");
             }
         }
+        CodeCoverage.run("getCost");  
         return cost;
     }
 

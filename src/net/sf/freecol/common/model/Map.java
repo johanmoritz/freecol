@@ -44,6 +44,7 @@ import javax.swing.ImageIcon;
 import javax.xml.stream.XMLStreamException;
 
 import net.sf.freecol.client.gui.ImageLibrary;
+import net.sf.freecol.common.debug.CodeCoverage;
 import net.sf.freecol.common.debug.FreeColDebugger;
 import net.sf.freecol.common.i18n.Messages;
 import net.sf.freecol.common.io.FreeColXMLReader;
@@ -1219,15 +1220,26 @@ public class Map extends FreeColGameObject implements Location {
      */
     private PathNode findMapPath(Unit unit, Tile start, Tile end, Unit carrier,
                                  CostDecider costDecider, LogBuilder lb) {
-        final Unit offMapUnit = (carrier != null) ? carrier
-            : (unit != null && unit.isNaval()) ? unit
-            : null;
+        final Unit offMapUnit;
+        if (carrier != null) {
+            CodeCoverage.run("findMapPath");
+            offMapUnit = carrier;
+        } else {
+            if (unit != null && unit.isNaval()) {
+                CodeCoverage.run("findMapPath");
+                offMapUnit = unit;
+            } else {
+                CodeCoverage.run("findMapPath");
+                offMapUnit = null;
+            }
+        }
         final GoalDecider gd = GoalDeciders.getLocationGoalDecider(end);
         final SearchHeuristic sh = getManhattenHeuristic(end);
         Unit embarkTo, endUnit;
 
         PathNode path;
         if (start.getContiguity() == end.getContiguity()) {
+            CodeCoverage.run("findMapPath");
             // If the unit potentially could get to the destination
             // without a carrier, compare both with-carrier and
             // without-carrier paths.  The latter will usually be
@@ -1235,17 +1247,27 @@ public class Map extends FreeColGameObject implements Location {
             // road system.
             path = searchMap(unit, start, gd, costDecider,
                              INFINITY, null, sh, lb);
-            PathNode carrierPath = (carrier == null) ? null
-                : searchMap(unit, start, gd, costDecider,
-                            INFINITY, carrier, sh, lb);
+            PathNode carrierPath;
+            if (carrier == null) {
+                CodeCoverage.run("findMapPath");
+                carrierPath = null;
+            } else {
+                CodeCoverage.run("findMapPath");
+                carrierPath = searchMap(unit, start, gd, costDecider,
+                        INFINITY, carrier, sh, lb);
+            }
             if (carrierPath != null
                 && (path == null
                     || (path.getLastNode().getCost()
                         > carrierPath.getLastNode().getCost()))) {
+                CodeCoverage.run("findMapPath");
                 path = carrierPath;
+            } else {
+                CodeCoverage.run("findMapPath");
             }
 
         } else if (offMapUnit != null) {
+            CodeCoverage.run("findMapPath");
             // If there is an off-map unit then complex paths which
             // use settlements and inland lakes are possible, but hard
             // to capture with the contiguity test, so just allow the
@@ -1256,6 +1278,7 @@ public class Map extends FreeColGameObject implements Location {
         } else if (unit != null && unit.isOnCarrier()
             && !start.isLand() && end.isLand()
             && !start.getContiguityAdjacent(end.getContiguity()).isEmpty()) {
+            CodeCoverage.run("findMapPath");
             // Special case where a land unit is trying to move off a
             // ship to adjacent land.
             path = searchMap(unit, start, gd, costDecider, INFINITY,
@@ -1266,17 +1289,22 @@ public class Map extends FreeColGameObject implements Location {
             && unit != null && unit.getOwner().owns(endUnit)
             && !end.getContiguityAdjacent(start.getContiguity()).isEmpty()
             && (embarkTo = end.getCarrierForUnit(unit)) != null) {
+            CodeCoverage.run("findMapPath");
             // Special case where a land unit is trying to move from
             // land to an adjacent ship.
             path = searchMap(unit, start,
                              GoalDeciders.getAdjacentLocationGoalDecider(end),
                              costDecider, INFINITY, null, null, lb);
             if (path != null) {
+                CodeCoverage.run("findMapPath");
                 PathNode last = path.getLastNode();
                 last.next = new PathNode(embarkTo, 0, last.getTurns()+1, true,
                     last, null);
+            } else {
+                CodeCoverage.run("findMapPath");
             }
         } else { // Otherwise, there is a connectivity failure.
+            CodeCoverage.run("findMapPath");
             path = null;
         }
         return path;
