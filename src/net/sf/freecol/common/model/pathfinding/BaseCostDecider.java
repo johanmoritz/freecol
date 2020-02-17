@@ -68,6 +68,8 @@ class BaseCostDecider implements CostDecider {
                 || !unit.getType().canMoveToHighSeas()){
                 CodeCoverage.run("getCost");
                 return ILLEGAL_MOVE;
+            }else{
+                CodeCoverage.run("getCost");
             }
             newTurns = unit.getSailTurns();
             movesLeft = unit.getInitialMovesLeft();
@@ -82,6 +84,8 @@ class BaseCostDecider implements CostDecider {
             if (!unit.getType().canMoveToHighSeas()) {
                 CodeCoverage.run("getCost");
                 return ILLEGAL_MOVE;
+            }else{
+                CodeCoverage.run("getCost");
             }
             newTurns = unit.getSailTurns();
             movesLeft = unit.getInitialMovesLeft();
@@ -138,6 +142,8 @@ class BaseCostDecider implements CostDecider {
                 CodeCoverage.run("getCost");
                 cost += this.movesLeft;
                 this.movesLeft = 0;
+            }else{
+                CodeCoverage.run("getCost");
             }
         }
         CodeCoverage.run("getCost");  
