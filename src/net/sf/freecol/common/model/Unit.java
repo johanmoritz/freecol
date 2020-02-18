@@ -4097,17 +4097,23 @@ public class Unit extends GoodsLocation
         if (newLocation instanceof Colony) {
             CodeCoverage.run("setLocation");
             return ((Colony)newLocation).joinColony(this);
+        } else {
+            CodeCoverage.run("setLocation");
         }
-        CodeCoverage.run("setLocation");
 
-        if (newLocation == this.location) { CodeCoverage.run("setLocation"); return true; }
-        CodeCoverage.run("setLocation");
+        if (newLocation == this.location) {
+            CodeCoverage.run("setLocation");
+            return true;
+        } else {
+            CodeCoverage.run("setLocation");
+        }
         if (newLocation != null && !newLocation.canAdd(this)) {
             CodeCoverage.run("setLocation");
             logger.warning("Can not add " + this + " to " + newLocation);
             return false;
+        } else {
+            CodeCoverage.run("setLocation");
         }
-        CodeCoverage.run("setLocation");
 
         // If the unit either starts or ends this move in a colony
         // then teaching status can change.  However, if it moves
@@ -4116,22 +4122,35 @@ public class Unit extends GoodsLocation
         // We have to handle this issue here in setLocation as this is
         // the only place that contains information about both
         // locations.
-        Colony oldColony = (isInColony()) ? this.location.getColony() : null;
-        Colony newColony = (newLocation instanceof WorkLocation)
-            ? newLocation.getColony() : null;
+
+        Colony oldColony;
+        if (isInColony()) {
+            CodeCoverage.run("setLocation");
+            oldColony = this.location.getColony();
+        } else {
+            CodeCoverage.run("setLocation");
+            oldColony = null;
+        }
+        Colony newColony;
+        if (newLocation instanceof WorkLocation) {
+            CodeCoverage.run("setLocation");
+            newColony = newLocation.getColony();
+        } else {
+            CodeCoverage.run("setLocation");
+            newColony = null;
+        }
         boolean withinColony = newColony != null && newColony == oldColony;
         boolean preserveEducation = withinColony
             && (((WorkLocation)this.location).canTeach()
                 == ((WorkLocation)newLocation).canTeach());
 
         // First disable education that will fail due to the move.
-        CodeCoverage.run("setLocation");
         if (oldColony != null && !preserveEducation) {
             CodeCoverage.run("setLocation");
             oldColony.updateEducation(this, false);
+        } else {
+            CodeCoverage.run("setLocation");
         }
-
-        CodeCoverage.run("setLocation");
 
         // Move out of the old location.
         if (this.location == null) {
@@ -4142,8 +4161,9 @@ public class Unit extends GoodsLocation
             CodeCoverage.run("setLocation");
             throw new RuntimeException("Failed to remove " + this
                 + " from " + this.location.getId());
+        } else {
+            CodeCoverage.run("setLocation");
         }
-        CodeCoverage.run("setLocation");
 
         // Move in to the new location.
         if (newLocation == null) {
@@ -4154,25 +4174,36 @@ public class Unit extends GoodsLocation
             CodeCoverage.run("setLocation");
             throw new RuntimeException("Failed to add "
                 + this + " to " + newLocation.getId());
+        } else {
+            CodeCoverage.run("setLocation");
         }
-        CodeCoverage.run("setLocation");
 
         // See if education needs to be re-enabled.
         if (newColony != null && !preserveEducation) {
             CodeCoverage.run("setLocation");
             newColony.updateEducation(this, true);
+        } else {
+            CodeCoverage.run("setLocation");
         }
-
-        CodeCoverage.run("setLocation");
 
         // Update population of any colonies involved.
         if (!withinColony) {
             CodeCoverage.run("setLocation");
-            if (oldColony != null) { CodeCoverage.run("setLocation"); oldColony.updatePopulation();};
+            if (oldColony != null) {
+                CodeCoverage.run("setLocation");
+                oldColony.updatePopulation();
+            } else {
+                CodeCoverage.run("setLocation");
+            }
+            if (newColony != null) {
+                CodeCoverage.run("setLocation");
+                newColony.updatePopulation();
+            } else {
+                CodeCoverage.run("setLocation");
+            }
+        } else {
             CodeCoverage.run("setLocation");
-            if (newColony != null) {CodeCoverage.run("setLocation"); newColony.updatePopulation();};
         }
-        CodeCoverage.run("setLocation");
         return true;
     }
 
