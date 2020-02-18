@@ -102,6 +102,9 @@ class BaseCostDecider implements CostDecider {
             // Disallow illegal moves.
             // Special moves and moving off a carrier consume a whole turn.
             CodeCoverage.run("getCost");
+
+            boolean doIf = false;
+
             boolean consumeMove = false;
             switch (unit.getSimpleMoveType(oldTile, newTile)) {
             case MOVE_HIGH_SEAS:
@@ -109,21 +112,13 @@ class BaseCostDecider implements CostDecider {
                 break;
             case ATTACK_UNIT:
                 CodeCoverage.run("getCost"); 
-                if (!unit.isOnCarrier()){
-                    CodeCoverage.run("getCost");
-                    break; // Fall through if disembarking.
-                } 
-                consumeMove = true;
+                doIf = true;
                 break;
                 // Ignore hostile units in the base case, treating attacks
                 // as moves.
             case MOVE:
                 CodeCoverage.run("getCost");
-                if (!unit.isOnCarrier()){
-                    CodeCoverage.run("getCost");
-                    break; // Fall through if disembarking.
-                }
-                consumeMove = true;
+                doIf = true;
                 break;
             case ATTACK_SETTLEMENT:
                 CodeCoverage.run("getCost");
@@ -160,6 +155,15 @@ class BaseCostDecider implements CostDecider {
             default:
                 CodeCoverage.run("getCost");
                 return ILLEGAL_MOVE;
+            }
+
+            if(doIf) {
+              if (!unit.isOnCarrier()){
+               CodeCoverage.run("getCost");
+              } else {
+                consumeMove = true;
+                CodeCoverage.run("getCost");
+              }
             }
 
             cost = adjust(unit, oldTile, newTile, movesLeftBefore);
