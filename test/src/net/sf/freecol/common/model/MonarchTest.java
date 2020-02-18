@@ -29,6 +29,7 @@ import net.sf.freecol.common.io.FreeColXMLWriter;
 import net.sf.freecol.common.model.Colony;
 import net.sf.freecol.common.model.Monarch.MonarchAction;
 import net.sf.freecol.common.option.GameOptions;
+import net.sf.freecol.server.model.ServerPlayer;
 import net.sf.freecol.common.util.RandomChoice;
 import net.sf.freecol.util.test.FreeColTestCase;
 
@@ -52,6 +53,7 @@ public class MonarchTest extends FreeColTestCase {
         game.changeMap(getTestMap());
 
         Player dutch = game.getPlayerByNationId("model.nation.dutch");
+        ServerPlayer france = getServerPlayer(game, "model.nation.french");
 
         // grace period has not yet expired
         List<RandomChoice<MonarchAction>> choices
@@ -81,6 +83,24 @@ public class MonarchTest extends FreeColTestCase {
         assertFalse(choicesContain(choices, MonarchAction.RAISE_TAX_ACT));
         assertTrue(choicesContain(choices, MonarchAction.LOWER_TAX_WAR));
         assertTrue(choicesContain(choices, MonarchAction.LOWER_TAX_OTHER));
+        
+        // Set players at war
+        dutch.setStance(france, Stance.WAR);
+        france.setStance(dutch, Stance.WAR);
+        dutch.setGold(Monarch.MONARCH_MINIMUM_PRICE);
+        choices = dutch.getMonarch().getActionChoices();
+        assertTrue(choicesContain(choices, MonarchAction.MONARCH_MERCENARIES));
+
+        // SUPPORT_LAND has the same specification as
+        // MONARCH_MERCENTARIES, except it is only added
+        // as a choice at a low difficulty level (given
+        // that MONARCH_MERCENARIES is not chosen).
+        Specification specification = game.getSpecification();
+        specification.applyDifficultyLevel("model.difficulty.easy");
+        game.setSpecification(specification);
+        dutch.setGold(Monarch.MONARCH_MINIMUM_PRICE - 10);
+        choices = dutch.getMonarch().getActionChoices();
+        assertTrue(choicesContain(choices, MonarchAction.SUPPORT_LAND));
 
         dutch.changePlayerType(Player.PlayerType.REBEL);
         choices = dutch.getMonarch().getActionChoices();
