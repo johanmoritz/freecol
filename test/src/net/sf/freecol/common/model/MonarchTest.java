@@ -108,6 +108,16 @@ public class MonarchTest extends FreeColTestCase {
 
     }
 
+    public void testContextIndependentActionValidations() {
+        Game game = getStandardGame();
+        game.changeMap(getTestMap());
+
+        Player dutch = game.getPlayerByNationId("model.nation.dutch");
+
+        assertFalse(dutch.getMonarch().actionIsValid(MonarchAction.FORCE_TAX));
+        assertTrue(dutch.getMonarch().actionIsValid(MonarchAction.WAIVE_TAX));
+        assertFalse(dutch.getMonarch().actionIsValid(MonarchAction.DISPLEASURE));
+    }
 
     private boolean choicesContain(List<RandomChoice<MonarchAction>> choices, MonarchAction action) {
         for (RandomChoice<MonarchAction> choice : choices) {
