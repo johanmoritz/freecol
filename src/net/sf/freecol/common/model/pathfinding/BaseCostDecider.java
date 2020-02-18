@@ -108,7 +108,13 @@ class BaseCostDecider implements CostDecider {
                 CodeCoverage.run("getCost");
                 break;
             case ATTACK_UNIT:
-                CodeCoverage.run("getCost");  
+                CodeCoverage.run("getCost"); 
+                if (!unit.isOnCarrier()){
+                    CodeCoverage.run("getCost");
+                    break; // Fall through if disembarking.
+                } 
+                consumeMove = true;
+                break;
                 // Ignore hostile units in the base case, treating attacks
                 // as moves.
             case MOVE:
@@ -117,20 +123,36 @@ class BaseCostDecider implements CostDecider {
                     CodeCoverage.run("getCost");
                     break; // Fall through if disembarking.
                 }
+                consumeMove = true;
+                break;
             case ATTACK_SETTLEMENT:
                 CodeCoverage.run("getCost");
+                consumeMove = true;
+                break;
             case EXPLORE_LOST_CITY_RUMOUR:
                 CodeCoverage.run("getCost");
+                consumeMove = true;
+                break;
             case EMBARK:
                 CodeCoverage.run("getCost");
+                consumeMove = true;
+                break;
             case ENTER_INDIAN_SETTLEMENT_WITH_FREE_COLONIST:
                 CodeCoverage.run("getCost");
+                consumeMove = true;
+                break;
             case ENTER_INDIAN_SETTLEMENT_WITH_SCOUT:
                 CodeCoverage.run("getCost");
+                consumeMove = true;
+                break;
             case ENTER_INDIAN_SETTLEMENT_WITH_MISSIONARY:
                 CodeCoverage.run("getCost");
+                consumeMove = true;
+                break;
             case ENTER_FOREIGN_COLONY_WITH_SCOUT:
                 CodeCoverage.run("getCost");
+                consumeMove = true;
+                break;
             case ENTER_SETTLEMENT_WITH_CARRIER_AND_GOODS:
                 CodeCoverage.run("getCost");
                 consumeMove = true;

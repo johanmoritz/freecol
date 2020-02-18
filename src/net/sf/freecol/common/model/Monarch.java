@@ -423,6 +423,7 @@ public final class Monarch extends FreeColGameObject implements Named {
             // is not maxed out (according to taxMaximum())
             case RAISE_TAX_ACT: 
                 CodeCoverage.run("actionIsValid");
+                return player.getTax() < taxMaximum();
             case RAISE_TAX_WAR:
                 CodeCoverage.run("actionIsValid");
                 return player.getTax() < taxMaximum();
@@ -436,6 +437,7 @@ public final class Monarch extends FreeColGameObject implements Named {
             // allowed tax (MINIMUM_TAX_RATE)
             case LOWER_TAX_WAR: 
                 CodeCoverage.run("actionIsValid");
+                return player.getTax() > MINIMUM_TAX_RATE + 10;
             case LOWER_TAX_OTHER:
                 CodeCoverage.run("actionIsValid");
                 return player.getTax() > MINIMUM_TAX_RATE + 10;
@@ -471,6 +473,8 @@ public final class Monarch extends FreeColGameObject implements Named {
             // NOT covered by test.
             case SUPPORT_LAND: 
                 CodeCoverage.run("actionIsValid");
+                return player.isAtWar() && !getDispleasure()
+                    && player.hasSettlements();
             // Can only get monarch mercentaries if the 
             // player is a war, there is no displeasure
             // and the player has settlements.
