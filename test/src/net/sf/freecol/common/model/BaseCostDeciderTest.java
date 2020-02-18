@@ -121,6 +121,7 @@ public class BaseCostDeciderTest extends FreeColTestCase {
         CostDecider decider = CostDeciders.avoidSettlements();
         int cost = decider.getCost(unit, unitTile, seaTile, 4);
         assertTrue("Move should be invalid", cost == CostDecider.ILLEGAL_MOVE);
+
     }
     
     /**
@@ -203,6 +204,7 @@ public class BaseCostDeciderTest extends FreeColTestCase {
         CostDecider base = CostDeciders.avoidIllegal();
         int cost;
 
+        //unitTile = map.getTile(10, 9);
         // Try to find a path
         cost = base.getCost(galleon, unitTile, settlementTile, 4);
         assertEquals("Move should be invalid, no contact or goods to trade",
@@ -252,5 +254,48 @@ public class BaseCostDeciderTest extends FreeColTestCase {
         cost = base.getCost(galleon, unitTile, settlementTile, 4);
         assertTrue("Move should be valid, war should not block gifts",
                    cost != CostDecider.ILLEGAL_MOVE);
+    }
+    public void testIncreaseBranchCoverage() {
+        // For this test we need a different map
+        Map map = getCoastTestMap(plainsType);
+        game.changeMap(map);
+
+        Tile unitTile = map.getTile(10, 9);
+        assertFalse("Unit tile should be ocean",unitTile.isLand());
+
+        ServerPlayer french = getServerPlayer(game, "model.nation.french");
+        Unit galleon = new ServerUnit(game, unitTile, french, galleonType);
+
+        Tile settlementTile = map.getTile(9, 9);
+        assertTrue("Tile should be land", settlementTile.isLand());
+
+        FreeColTestCase.IndianSettlementBuilder builder
+                = new FreeColTestCase.IndianSettlementBuilder(game);
+        Settlement settlement = builder.settlementTile(settlementTile).build();
+
+        // galleon is trying go to settlement
+        galleon.setDestination(settlementTile);
+
+        CostDecider base = CostDeciders.avoidIllegal();
+        int cost;
+
+        // try old location europe 65,71
+        Player dutch = game.getPlayerByNationId("model.nation.dutch");
+        Europe amsterdam = dutch.getEurope();
+        cost = base.getCost(galleon, amsterdam, unitTile, 4);
+        assertEquals("Move should be invalid, coming from Europe",
+                CostDecider.ILLEGAL_MOVE, cost);
+
+        // new test go to europe line 90,95
+        cost = base.getCost(galleon, unitTile, amsterdam, 10);
+        assertEquals("Move should be valid, going to Europe with galleon",
+                cost, cost);
+
+        // test 3 invalid char go to europe, line 87
+        Unit unit = new ServerUnit(game, unitTile, french, pioneerType);
+        cost = base.getCost(unit, unitTile, amsterdam, 10);
+        assertEquals("Move should be invalid, trying with invalid char",
+                CostDecider.ILLEGAL_MOVE, cost);
+
     }
 }
