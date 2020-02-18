@@ -579,6 +579,110 @@ public class MapTest extends FreeColTestCase {
             path.getTransportDropNode());
     }
 
+    public void testFindMapPath0() {
+        Game game = getStandardGame();
+        Map map = getCoastTestMap(plainsType, true);
+        game.changeMap(map);
+
+        Player dutch = game.getPlayerByNationId("model.nation.dutch");
+        PathNode path;
+
+        Tile seaTile = map.getTile(13, 2);
+        Tile landTile = map.getTile(6, 2);
+        landTile.setContiguity(1);
+        Unit galleon = new ServerUnit(game, seaTile, dutch, galleonType);
+
+        // Check galleon cannot find a path from sea tile to non-contiguous land tile
+        path = map.findMapPath(galleon, seaTile, landTile, null, null, null);
+        assertNull(path);
+    }
+
+    public void testFindMapPath1() {
+        Game game = getStandardGame();
+        Map map = getCoastTestMap(plainsType, true);
+        game.changeMap(map);
+
+        Player dutch = game.getPlayerByNationId("model.nation.dutch");
+        PathNode path;
+
+        Tile seaTile = map.getTile(10, 2);
+        Tile landTile = map.getTile(6, 2);
+        landTile.setContiguity(1);
+        map.getTile(9,2).setContiguity(1);
+        map.getTile(8,2).setContiguity(1);
+        map.getTile(7,2).setContiguity(1);
+        Unit galleon = new ServerUnit(game, seaTile, dutch, galleonType);
+        Unit colonist = new ServerUnit(game, galleon, dutch, colonistType);
+
+        // Check land unit can move off ship to a non-contiguous adjacent body of land
+        path = map.findMapPath(colonist, seaTile, landTile, null, null, null);
+        assertNotNull(path);
+    }
+
+    public void testFindMapPath2() {
+        Game game = getStandardGame();
+        Map map = getCoastTestMap(plainsType, true);
+        game.changeMap(map);
+
+        Player dutch = game.getPlayerByNationId("model.nation.dutch");
+        PathNode path;
+
+        Tile seaTile = map.getTile(10, 2);
+        Tile landTile = map.getTile(6, 2);
+        landTile.setContiguity(1);
+        map.getTile(9,2).setContiguity(1);
+        Unit galleon = new ServerUnit(game, seaTile, dutch, galleonType);
+        Unit colonist = new ServerUnit(game, landTile, dutch, colonistType);
+
+        // Check land unit can board owned ship on an non-contiguous adjacent body of sea
+        path = map.findMapPath(colonist, landTile, seaTile, null, null, null);
+        assertNotNull(path);
+    }
+
+    public void testFindMapPath3() {
+        Game game = getStandardGame();
+        Map map = getCoastTestMap(plainsType, true);
+        game.changeMap(map);
+
+        Player dutch = game.getPlayerByNationId("model.nation.dutch");
+        PathNode path;
+
+        Tile seaTile = map.getTile(10, 2);
+        Tile landTile = map.getTile(6, 2);
+        landTile.setContiguity(1);
+        map.getTile(9,2).setContiguity(1);
+        // Create a river that blocks the path
+        for (int y = 0; y < map.getHeight(); ++y) {
+            map.getTile(8, y).setType(oceanType);
+        }
+        Unit galleon = new ServerUnit(game, seaTile, dutch, galleonType);
+        Unit colonist = new ServerUnit(game, landTile, dutch, colonistType);
+
+        // Check land unit cannot board owned ship on that is adjacent to unreachable body of land
+        path = map.findMapPath(colonist, landTile, seaTile, null, null, null);
+        assertNull(path);
+    }
+
+    public void testFindMapPath4() {
+        Game game = getStandardGame();
+        Map map = getCoastTestMap(plainsType, true);
+        game.changeMap(map);
+
+        Player dutch = game.getPlayerByNationId("model.nation.dutch");
+        PathNode path;
+
+        Tile seaTile = map.getTile(10, 2);
+        Tile landTile = map.getTile(6, 2);
+        landTile.setContiguity(1);
+        Unit galleon = new ServerUnit(game, seaTile, dutch, galleonType);
+        Unit colonist = new ServerUnit(game, landTile, dutch, colonistType);
+
+        // Check land unit cannot board owned ship that is not adjacent to any contiguous land tile,
+        // should cause connectivity failure
+        path = map.findMapPath(colonist, landTile, seaTile, null, null, null);
+        assertNull(path);
+    }
+
     public void testCopy() {
         Game game = getStandardGame();
         Map map = getTestMap();

@@ -1218,7 +1218,7 @@ public class Map extends FreeColGameObject implements Location {
      * @return A path starting at the start tile and ending at the end
      *     tile, or null if none found.
      */
-    private PathNode findMapPath(Unit unit, Tile start, Tile end, Unit carrier,
+    public PathNode findMapPath(Unit unit, Tile start, Tile end, Unit carrier,
                                  CostDecider costDecider, LogBuilder lb) {
         final Unit offMapUnit;
         if (carrier != null) {
