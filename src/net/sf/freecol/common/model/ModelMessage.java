@@ -285,30 +285,46 @@ public class ModelMessage extends StringTemplate {
      * @param source The source object
      * @return An object to be displayed for the message.
      */
-    static private FreeColObject getDefaultDisplay(MessageType messageType,
+    static public FreeColObject getDefaultDisplay(MessageType messageType,
                                                    FreeColGameObject source) {
         FreeColObject o = null;
         switch (messageType) {
         case SONS_OF_LIBERTY:
             CodeCoverage.run("getDefaultDisplay");
+            o = source.getSpecification().getGoodsType("model.goods.bells");
+            break;
         case GOVERNMENT_EFFICIENCY:
             CodeCoverage.run("getDefaultDisplay");
             o = source.getSpecification().getGoodsType("model.goods.bells");
             break;
         case UNIT_IMPROVED:
             CodeCoverage.run("getDefaultDisplay");
+            o = source;
+            break;
         case UNIT_DEMOTED:
             CodeCoverage.run("getDefaultDisplay");
+            o = source;
+            break;
         case UNIT_LOST:
             CodeCoverage.run("getDefaultDisplay");
+            o = source;
+            break;
         case UNIT_ADDED:
             CodeCoverage.run("getDefaultDisplay");
+            o = source;
+            break;
         case LOST_CITY_RUMOUR:
             CodeCoverage.run("getDefaultDisplay");
+            o = source;
+            break;
         case COMBAT_RESULT:
             CodeCoverage.run("getDefaultDisplay");
+            o = source;
+            break;
         case DEMANDS:
             CodeCoverage.run("getDefaultDisplay");
+            o = source;
+            break;
         case GOODS_MOVEMENT:
             CodeCoverage.run("getDefaultDisplay");
             o = source;
@@ -319,20 +335,76 @@ public class ModelMessage extends StringTemplate {
             break;
         case DEFAULT:
             CodeCoverage.run("getDefaultDisplay");
+            if (source instanceof Player) {
+                CodeCoverage.run("getDefaultDisplay");
+                o = source;
+            } else {
+                CodeCoverage.run("getDefaultDisplay");
+            }
+            break;
         case WARNING:
             CodeCoverage.run("getDefaultDisplay");
+            if (source instanceof Player) {
+                CodeCoverage.run("getDefaultDisplay");
+                o = source;
+            } else {
+                CodeCoverage.run("getDefaultDisplay");
+            }
+            break;
         case WAREHOUSE_CAPACITY:
             CodeCoverage.run("getDefaultDisplay");
+            if (source instanceof Player) {
+                CodeCoverage.run("getDefaultDisplay");
+                o = source;
+            } else {
+                CodeCoverage.run("getDefaultDisplay");
+            }
+            break;
         case FOREIGN_DIPLOMACY:
             CodeCoverage.run("getDefaultDisplay");
+            if (source instanceof Player) {
+                CodeCoverage.run("getDefaultDisplay");
+                o = source;
+            } else {
+                CodeCoverage.run("getDefaultDisplay");
+            }
+            break;
         case MARKET_PRICES:
             CodeCoverage.run("getDefaultDisplay");
+            if (source instanceof Player) {
+                CodeCoverage.run("getDefaultDisplay");
+                o = source;
+            } else {
+                CodeCoverage.run("getDefaultDisplay");
+            }
+            break;
         case MISSING_GOODS:
             CodeCoverage.run("getDefaultDisplay");
+            if (source instanceof Player) {
+                CodeCoverage.run("getDefaultDisplay");
+                o = source;
+            } else {
+                CodeCoverage.run("getDefaultDisplay");
+            }
+            break;
         case TUTORIAL:
             CodeCoverage.run("getDefaultDisplay");
+            if (source instanceof Player) {
+                CodeCoverage.run("getDefaultDisplay");
+                o = source;
+            } else {
+                CodeCoverage.run("getDefaultDisplay");
+            }
+            break;
         case GIFT_GOODS:
             CodeCoverage.run("getDefaultDisplay");
+            if (source instanceof Player) {
+                CodeCoverage.run("getDefaultDisplay");
+                o = source;
+            } else {
+                CodeCoverage.run("getDefaultDisplay");
+            }
+            break;
         default:
             CodeCoverage.run("getDefaultDisplay");
             if (source instanceof Player) {

@@ -95,4 +95,52 @@ public class ModelMessageTest extends FreeColTestCase {
                                             player, null);
         assertEquals(Messages.message(realMessageId), Messages.message(mm1));
     }
+
+    public void testGetDefaultDisplay0() {
+        Game game = getGame();
+        game.changeMap(getTestMap(true));
+
+        Player player = game.getPlayerByNationId("model.nation.dutch");
+        String fakeMessageId = "no.such.messageId"; // Must no exist
+        ModelMessage mm = new ModelMessage(MessageType.GOVERNMENT_EFFICIENCY,
+                                            fakeMessageId, player);
+
+        assertEquals(mm.getDisplayId(), "model.goods.bells");
+    }
+
+    public void testGetDefaultDisplay1() {
+        Game game = getGame();
+        game.changeMap(getTestMap(true));
+
+        Player player = game.getPlayerByNationId("model.nation.dutch");
+        String fakeMessageId = "no.such.messageId"; // Must no exist
+        ModelMessage mm = new ModelMessage(MessageType.SONS_OF_LIBERTY,
+                                            fakeMessageId, player);
+
+        assertEquals(mm.getDisplayId(), "model.goods.bells");
+    }
+
+    public void testGetDefaultDisplay2() {
+        Game game = getGame();
+        game.changeMap(getTestMap(true));
+
+        Player player = game.getPlayerByNationId("model.nation.dutch");
+        String fakeMessageId = "no.such.messageId"; // Must no exist
+        ModelMessage mm = new ModelMessage(MessageType.UNIT_ADDED,
+                                            fakeMessageId, player);
+
+        assertEquals(mm.getDisplayId(), mm.getSourceId());
+    }
+
+    public void testGetDefaultDisplay3() {
+        Game game = getGame();
+        game.changeMap(getTestMap(true));
+
+        Player player = game.getPlayerByNationId("model.nation.dutch");
+        String fakeMessageId = "no.such.messageId"; // Must no exist
+        ModelMessage mm = new ModelMessage(MessageType.UNIT_IMPROVED,
+                                            fakeMessageId, player);
+
+        assertEquals(mm.getDisplayId(), mm.getSourceId());
+    }
 }
