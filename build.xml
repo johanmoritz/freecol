@@ -60,6 +60,7 @@
      </path>
     <path id="test.run.classpath">
         <pathelement location="${freecol.build.dir}" />
+        <pathelement location="${user.home}/.sdkman/candidates/ant/current/lib/clover.jar"/>
         <path refid="junit.classpath"/>
         <path refid="libraries.classpath" />
     </path>
@@ -1003,5 +1004,8 @@
         <cobertura-report srcdir="${freecol.src.dir}"
                           destdir="cobertura/report"/>
     </target>
+
+    <taskdef resource="cloverlib.xml"/>
+    <clover-env/>
 
 </project>
