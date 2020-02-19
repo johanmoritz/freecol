@@ -70,9 +70,9 @@ its output?
 
 Show the comments that describe the requirements for the coverage.
 
-[Report of old coverage](https://github.com/johanmoritz/freecol/blob/assignment-documentation/openclover_before.html)
+[Report of old coverage](https://github.com/johanmoritz/freecol/blob/assignment-documentation/FreeCol_Before/index.html)
 
-[Report of new coverage] (https://github.com/johanmoritz/freecol/blob/assignment-documentation/openclover_after.html)
+[Report of new coverage](https://github.com/johanmoritz/freecol/blob/assignment-documentation/FreeCol_After/index.html)
 
 **Test cases added:**
 
