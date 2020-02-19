@@ -21,6 +21,7 @@ package net.sf.freecol.common.model;
 
 import javax.xml.stream.XMLStreamException;
 
+import net.sf.freecol.common.debug.CodeCoverage;
 import net.sf.freecol.common.i18n.Messages;
 import net.sf.freecol.common.io.FreeColXMLReader;
 import net.sf.freecol.common.io.FreeColXMLWriter;
@@ -349,48 +350,102 @@ public class Scope extends FreeColObject {
      */
     @Override
     public boolean equals(Object o) {
-        if (o == this) return true;
+        if (o == this) { 
+            CodeCoverage.run("equals");
+            return true;
+        } else {
+            CodeCoverage.run("equals");
+        }
+
         if (o instanceof Scope) {
+            CodeCoverage.run("equals");
             Scope other = (Scope)o;
             if (matchNegated != other.matchNegated) {
+                CodeCoverage.run("equals");
                 return false;
+            } else {
+                CodeCoverage.run("equals");
             }
+
             if (matchesNull != other.matchesNull) {
+                CodeCoverage.run("equals");
                 return false;
+            } else {
+                CodeCoverage.run("equals");
             }
+
             if (type == null) {
+                CodeCoverage.run("equals");
                 if (other.getType() != null) {
+                    CodeCoverage.run("equals");
                     return false;
+                } else {
+                    CodeCoverage.run("equals");
                 }
             } else if (!type.equals(other.getType())) {
+                CodeCoverage.run("equals");
                 return false;
+            } else {
+                CodeCoverage.run("equals");
             }
+
             if (abilityId == null) {
+                CodeCoverage.run("equals");
                 if (!Utils.equals(other.getAbilityId(), abilityId)) {
+                    CodeCoverage.run("equals");
                     return false;
+                } else {
+                    CodeCoverage.run("equals");
                 }
             } else if (!abilityId.equals(other.getAbilityId())) {
+                CodeCoverage.run("equals");
                 return false;
+            } else {
+                CodeCoverage.run("equals");
             }
+
             if (abilityValue != other.getAbilityValue()) {
+                CodeCoverage.run("equals");
                 return false;
+            } else {
+                CodeCoverage.run("equals");
             }
+
             if (methodName == null) {
+                CodeCoverage.run("equals");
                 if (!Utils.equals(other.getMethodName(), methodName)) {
+                    CodeCoverage.run("equals");
                     return false;
+                } else {
+                    CodeCoverage.run("equals");
                 }
             } else if (!methodName.equals(other.getMethodName())) {
+                CodeCoverage.run("equals");
                 return false;
+            } else {
+                CodeCoverage.run("equals");
             }
+
             if (methodValue == null) {
+                CodeCoverage.run("equals");
                 if (!Utils.equals(other.getMethodValue(), methodValue)) {
+                    CodeCoverage.run("equals");
                     return false;
+                } else {
+                    CodeCoverage.run("equals");
                 }
             } else if (!methodValue.equals(other.getMethodValue())) {
+                CodeCoverage.run("equals");
                 return false;
+            } else {
+                CodeCoverage.run("equals");
             }
+
             return super.equals(other);
+        } else {
+            CodeCoverage.run("equals");
         }
+        
         return false;
     }
 

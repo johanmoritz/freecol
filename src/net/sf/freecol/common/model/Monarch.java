@@ -412,52 +412,94 @@ public final class Monarch extends FreeColGameObject implements Named {
     public boolean actionIsValid(MonarchAction action) {
         initializeCaches();
 
+        // Decides if the monarch can perform an
+        // action or not (depending on the game context)
         switch (action) {
+            // Can always perform a no-op
             case NO_ACTION:
                 CodeCoverage.run("actionIsValid");
                 return true;
+            // Can only raise taxes if the players tax
+            // is not maxed out (according to taxMaximum())
             case RAISE_TAX_ACT: 
                 CodeCoverage.run("actionIsValid");
+                return player.getTax() < taxMaximum();
             case RAISE_TAX_WAR:
                 CodeCoverage.run("actionIsValid");
                 return player.getTax() < taxMaximum();
+            // Can never force a tax (future improvement?)
+            // NOT covered by test.
             case FORCE_TAX:
                 CodeCoverage.run("actionIsValid");
                 return false;
+            // Can only lower tax if the players tax
+            // (if lowered) is greater than the minimum 
+            // allowed tax (MINIMUM_TAX_RATE)
             case LOWER_TAX_WAR: 
                 CodeCoverage.run("actionIsValid");
+                return player.getTax() > MINIMUM_TAX_RATE + 10;
             case LOWER_TAX_OTHER:
                 CodeCoverage.run("actionIsValid");
                 return player.getTax() > MINIMUM_TAX_RATE + 10;
+            // Can always waive tax
+            // NOT covered by test.
             case WAIVE_TAX:
                 CodeCoverage.run("actionIsValid");
                 return true;
+            // Can only add land or naval units to the
+            // Royal Expeditionary Force if it still exists.
             case ADD_TO_REF:
                 CodeCoverage.run("actionIsValid");
                 return !navalREFUnitTypes.isEmpty() && !landREFUnitTypes.isEmpty();
+            // Can only declare peace if there is at least one potentially friendly nation.
             case DECLARE_PEACE:
                 CodeCoverage.run("actionIsValid");
                 return !collectPotentialFriends().isEmpty();
+            // Can only declare war if there is at least one potential enemy nation.
             case DECLARE_WAR:
                 CodeCoverage.run("actionIsValid");
                 return !collectPotentialEnemies().isEmpty();
+            // Can only send support to sea if the
+            // player has been attacked by privateers,
+            // the sea is not currently supported
+            // and there is no displeasure.
             case SUPPORT_SEA:
                 CodeCoverage.run("actionIsValid");
                 return player.getAttackedByPrivateers() && !getSupportSea()
                     && !getDispleasure();
+            // Can only send support to land if the 
+            // player is a war, there is no displeasure
+            // and the player has settlements.
+            // NOT covered by test.
             case SUPPORT_LAND: 
                 CodeCoverage.run("actionIsValid");
+                return player.isAtWar() && !getDispleasure()
+                    && player.hasSettlements();
+            // Can only get monarch mercentaries if the 
+            // player is a war, there is no displeasure
+            // and the player has settlements.
+            // NOT covered by test.
             case MONARCH_MERCENARIES:
                 CodeCoverage.run("actionIsValid");
                 return player.isAtWar() && !getDispleasure()
                     && player.hasSettlements();
+            // Can only get hessian mercenaries if the 
+            // player has enough gold to pay for them
+            // (HESSIAN_MINIMUM_PRICE) and has settlements.
             case HESSIAN_MERCENARIES:
                 CodeCoverage.run("actionIsValid");
                 return player.checkGold(HESSIAN_MINIMUM_PRICE)
                     && player.hasSettlements();
+            // Can never take the action DISPLEASURE 
+            // (not implemented).
+            // NOT covered by test.
             case DISPLEASURE:
                 CodeCoverage.run("actionIsValid");
                 return false;
+            // If an invalid action is taken,
+            // an IllegalArgumentException 
+            // should be thrown.
+            // NOT covered by test.
             default:
                 CodeCoverage.run("actionIsValid");
                 throw new IllegalArgumentException("Bogus monarch action: "

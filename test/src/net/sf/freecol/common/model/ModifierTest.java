@@ -276,6 +276,41 @@ public class ModifierTest extends FreeColTestCase {
         assertFalse(scope1.equals(scope3));
         assertFalse(scope1.hashCode() == scope3.hashCode());
 
+        // Test with null scope type
+        Scope scope4 = new Scope();
+        scope4.setType(null);
+        assertFalse(scope1.equals(scope4));
+
+        // Compare with two null scope types, but same ability id
+        scope4.setAbilityId("id");
+
+        Scope scope5 = new Scope();
+        scope5.setType(null);
+        scope5.setAbilityId("id");
+        assertTrue(scope4.equals(scope5));
+
+        // Check when one ability id is null
+        scope4.setAbilityId(null);
+        assertFalse(scope4.equals(scope5));
+
+        // Check when both ability ids are null
+        scope5.setAbilityId(null);
+        assertTrue(scope4.equals(scope5));
+
+        // Test with one null method name
+        scope4.setMethodName(null);
+        scope5.setMethodName("somethingelse");
+        assertFalse(scope4.equals(scope5));
+
+        // Test with one null method value
+        scope5.setMethodName(null);
+        scope4.setMethodValue(null);
+        scope5.setMethodValue("somethingelse");
+        assertFalse(scope4.equals(scope5));
+
+        // If given object is not a scope
+        assertFalse(scope4.equals(null));
+
         Modifier modifier1 = new Modifier("test", 3,
                                           ModifierType.ADDITIVE);
         Modifier modifier2 = new Modifier("test", 3,

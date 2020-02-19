@@ -102,54 +102,47 @@ class BaseCostDecider implements CostDecider {
             // Disallow illegal moves.
             // Special moves and moving off a carrier consume a whole turn.
             CodeCoverage.run("getCost");
-            boolean consumeMove = false;
-            switch (unit.getSimpleMoveType(oldTile, newTile)) {
+
+            cost = reduceCC(oldTile, newTile, unit, movesLeftBefore, cost);
+
+
+        }
+        CodeCoverage.run("getCost");  
+        return cost;
+    }
+
+    public int reduceCC( Tile oldTile, Tile newTile, Unit unit, int movesLeftBefore, int cost){
+
+        boolean consumeMove = false;
+
+        switch (unit.getSimpleMoveType(oldTile, newTile)) {
             case MOVE_HIGH_SEAS:
-                CodeCoverage.run("getCost");
                 break;
             case ATTACK_UNIT:
-                CodeCoverage.run("getCost");  
-                // Ignore hostile units in the base case, treating attacks
-                // as moves.
+            // Ignore hostile units in the base case, treating attacks
+            // as moves.
             case MOVE:
-                CodeCoverage.run("getCost");
-                if (!unit.isOnCarrier()){
-                    CodeCoverage.run("getCost");
-                    break; // Fall through if disembarking.
-                }
+                if (!unit.isOnCarrier()) break;
             case ATTACK_SETTLEMENT:
-                CodeCoverage.run("getCost");
             case EXPLORE_LOST_CITY_RUMOUR:
-                CodeCoverage.run("getCost");
             case EMBARK:
-                CodeCoverage.run("getCost");
             case ENTER_INDIAN_SETTLEMENT_WITH_FREE_COLONIST:
-                CodeCoverage.run("getCost");
             case ENTER_INDIAN_SETTLEMENT_WITH_SCOUT:
-                CodeCoverage.run("getCost");
             case ENTER_INDIAN_SETTLEMENT_WITH_MISSIONARY:
-                CodeCoverage.run("getCost");
             case ENTER_FOREIGN_COLONY_WITH_SCOUT:
-                CodeCoverage.run("getCost");
             case ENTER_SETTLEMENT_WITH_CARRIER_AND_GOODS:
-                CodeCoverage.run("getCost");
                 consumeMove = true;
                 break;
             default:
-                CodeCoverage.run("getCost");
                 return ILLEGAL_MOVE;
-            }
-
-            cost = adjust(unit, oldTile, newTile, movesLeftBefore);
-            if (consumeMove) {
-                CodeCoverage.run("getCost");
-                cost += this.movesLeft;
-                this.movesLeft = 0;
-            }else{
-                CodeCoverage.run("getCost");
-            }
         }
-        CodeCoverage.run("getCost");  
+        cost = adjust(unit, oldTile, newTile, movesLeftBefore);
+
+        if (consumeMove) {
+
+            cost += this.movesLeft;
+            this.movesLeft = 0;
+        }
         return cost;
     }
 
