@@ -17,7 +17,7 @@ public class CodeCoverage {
           put("updateTileImprovementPlans", 25);
           put("readOption", 20);
           put("actionIsValid", 16);
-          put("createLandRegions", 86);
+          put("createLandRegions", 55);
           put("findMapPath", 14);
           put("getCost", 27);
           put("equals", 30);
