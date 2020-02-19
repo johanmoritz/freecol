@@ -74,9 +74,19 @@ Report of old coverage: [link]
 
 Report of new coverage: [link]
 
-Test cases added:
+**Test cases added:**
 
-git diff ...
+All test cases have been documented in the following issues:
+
+BaseCostDecided::getCost [Issue #38](https://github.com/johanmoritz/freecol/issues/38)
+
+Map::findMapPath [Issue #39](https://github.com/johanmoritz/freecol/issues/39)
+
+Monarch::actionIsValid [Issue #40](https://github.com/johanmoritz/freecol/issues/40)
+
+ModelMessage::getDefaultDisplay [Issue #42](https://github.com/johanmoritz/freecol/issues/42)
+
+Scope::equals [Issue #48](https://github.com/johanmoritz/freecol/issues/48)
 
 ## Refactoring
 
