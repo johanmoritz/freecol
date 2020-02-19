@@ -8,7 +8,7 @@ Name: FreeCol
 
 URL: https://github.com/johanmoritz/freecol
 
-An open-source turn-based strategy game based on Colonization. The goal of the game is to explore and colonize America.
+An open-source turn-based strategy game based on Colonization. The goal of the game is to explore and colonize America. The game is written in Java, built with the `ant` build system and has been worked on continually by a group of contributers since 2002. It's currently on its `0.11.6` version.
 
 ## Onboarding experience
 
