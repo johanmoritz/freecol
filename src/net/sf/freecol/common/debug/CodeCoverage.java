@@ -20,6 +20,7 @@ public class CodeCoverage {
           put("createLandRegions", 86);
           put("findMapPath", 14);
           put("getCost", 27);
+          put("equals", 30);
       }
   };
   public static void run(String functionName) {
@@ -39,8 +40,11 @@ public class CodeCoverage {
           sb.append(functionEntries.size()).append(" branch(es)");
           if (branchCounts.get(function) != null) {
               sb.append(" out of ").append(branchCounts.get(function));
+              sb.append(" were tested\n");
+              sb.append(((double) functionEntries.size()) / branchCounts.get(function) * 100).append("% coverage\n");
+          } else {
+              sb.append(" were tested\n");
           }
-          sb.append(" were tested\n");
           sb.append("The following branches were run: (line nr, #runs)\n");
 
           for (int lineNumber : functionEntries.keySet()) {
