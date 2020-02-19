@@ -214,87 +214,87 @@ public abstract class AbstractOption<T> extends FreeColSpecObject
         AbstractOption option = null;
 
         if (ACTION_TAG.equals(tag)) {
-            CodeCoverage.run("AbstractOption");
+            CodeCoverage.run("readOption");
             // FIXME: load FreeColActions from client options?
             // logger.finest("Skipping action " + xr.readId());
             xr.nextTag();
 
         } else if (AbstractUnitOption.TAG.equals(tag)) {
-            CodeCoverage.run("AbstractOption");
+            CodeCoverage.run("readOption");
             option = new AbstractUnitOption(spec);
 
         } else if (AudioMixerOption.TAG.equals(tag)) {
-            CodeCoverage.run("AbstractOption");
+            CodeCoverage.run("readOption");
             option = new AudioMixerOption(spec);
 
         } else if (BooleanOption.TAG.equals(tag)) {
-            CodeCoverage.run("AbstractOption");
+            CodeCoverage.run("readOption");
             option = new BooleanOption(spec);
 
         } else if (FileOption.TAG.equals(tag)) {
-            CodeCoverage.run("AbstractOption");
+            CodeCoverage.run("readOption");
             option = new FileOption(spec);
 
         } else if (IntegerOption.TAG.equals(tag)) {
-            CodeCoverage.run("AbstractOption");
+            CodeCoverage.run("readOption");
             option = new IntegerOption(spec);
 
         } else if (LanguageOption.TAG.equals(tag)) {
-            CodeCoverage.run("AbstractOption");
+            CodeCoverage.run("readOption");
             option = new LanguageOption(spec);
 
         } else if (ModListOption.TAG.equals(tag)) {
-            CodeCoverage.run("AbstractOption");
+            CodeCoverage.run("readOption");
             option = new ModListOption(spec);
 
         } else if (ModOption.TAG.equals(tag)) {
-            CodeCoverage.run("AbstractOption");
+            CodeCoverage.run("readOption");
             option = new ModOption(spec);
 
         } else if (OptionGroup.TAG.equals(tag)) {
-            CodeCoverage.run("AbstractOption");
+            CodeCoverage.run("readOption");
             option = new OptionGroup(spec);
 
         } else if (PercentageOption.TAG.equals(tag)) {
-            CodeCoverage.run("AbstractOption");
+            CodeCoverage.run("readOption");
             option = new PercentageOption(spec);
 
         } else if (RangeOption.TAG.equals(tag)) {
-            CodeCoverage.run("AbstractOption");
+            CodeCoverage.run("readOption");
             option = new RangeOption(spec);
 
         } else if (SelectOption.TAG.equals(tag)) {
-            CodeCoverage.run("AbstractOption");
+            CodeCoverage.run("readOption");
             option = new SelectOption(spec);
 
         } else if (StringOption.TAG.equals(tag)) {
-            CodeCoverage.run("AbstractOption");
+            CodeCoverage.run("readOption");
             option = new StringOption(spec);
 
         } else if (UnitListOption.TAG.equals(tag)) {
-            CodeCoverage.run("AbstractOption");
+            CodeCoverage.run("readOption");
             option = new UnitListOption(spec);
 
         } else if (UnitTypeOption.TAG.equals(tag)) {
-            CodeCoverage.run("AbstractOption");
+            CodeCoverage.run("readOption");
             option = new UnitTypeOption(spec);
 
         } else if (TextOption.TAG.equals(tag)) {
-            CodeCoverage.run("AbstractOption");
+            CodeCoverage.run("readOption");
             option = new TextOption(spec);
 
         } else {
-            CodeCoverage.run("AbstractOption");
+            CodeCoverage.run("readOption");
             logger.warning("Not an option type: " + tag);
             xr.nextTag();
         }
 
         if (option != null) {
-            CodeCoverage.run("AbstractOption");
+            CodeCoverage.run("readOption");
             option.readFromXML(xr);
             option.generateChoices();
         } else {
-            CodeCoverage.run("AbstractOption");
+            CodeCoverage.run("readOption");
         }
 
         return option;
