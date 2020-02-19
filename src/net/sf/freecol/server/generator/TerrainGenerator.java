@@ -174,35 +174,35 @@ public class TerrainGenerator {
         int equatorTemperature= 40;
         switch (temperaturePreference) {
         case MapGeneratorOptions.TEMPERATURE_COLD:
-            CodeCoverage.run("createLandRegions");
+            
             poleTemperature = -20;
             equatorTemperature = 25;
             break;
         case MapGeneratorOptions.TEMPERATURE_CHILLY:
-            CodeCoverage.run("createLandRegions");
+            
             poleTemperature = -20;
             equatorTemperature = 30;
             break;
         case MapGeneratorOptions.TEMPERATURE_TEMPERATE:
-            CodeCoverage.run("createLandRegions");
+            
             poleTemperature = -10;
             equatorTemperature = 35;
             break;
         case MapGeneratorOptions.TEMPERATURE_WARM:
-            CodeCoverage.run("createLandRegions");
+            
             poleTemperature = -5;
             equatorTemperature = 40;
             break;
         case MapGeneratorOptions.TEMPERATURE_HOT:
-            CodeCoverage.run("createLandRegions");
+            
             poleTemperature = 0;
             equatorTemperature = 40;
             break;
         default:
-            CodeCoverage.run("createLandRegions");
+            
             break;
         }
-        CodeCoverage.run("createLandRegions");
+        
 
         int temperatureRange = equatorTemperature-poleTemperature;
         int localeTemperature = poleTemperature + (90 - Math.abs(latitude))
@@ -226,97 +226,97 @@ public class TerrainGenerator {
         // Filter the candidates by temperature.
         int i = 0;
         while (i < candidateTileTypes.size()) {
-            CodeCoverage.run("createLandRegions");
+            
             TileType type = candidateTileTypes.get(i);
             if (!type.withinRange(TileType.RangeType.TEMPERATURE,
                                   localeTemperature)) {
-                CodeCoverage.run("createLandRegions");
+                
                 candidateTileTypes.remove(i);
                 continue;
             }
             i++;
         }
-        CodeCoverage.run("createLandRegions");
+        
 
         // Need to continue?
         switch (candidateTileTypes.size()) {
         case 0:
-            CodeCoverage.run("createLandRegions");
+            
             // CodeCoverage.print();
             throw new RuntimeException("No TileType for"
                 + " temperature==" + localeTemperature);
         case 1:
-            CodeCoverage.run("createLandRegions");
+            
             // CodeCoverage.print();
             return first(candidateTileTypes);
         default:
-            CodeCoverage.run("createLandRegions");
+            
             break;
         }
-        CodeCoverage.run("createLandRegions");
+        
 
         // Filter the candidates by humidity.
         i = 0;
         while (i < candidateTileTypes.size()) {
-            CodeCoverage.run("createLandRegions");
+            
             TileType type = candidateTileTypes.get(i);
             if (!type.withinRange(TileType.RangeType.HUMIDITY,
                                   localeHumidity)) {
-                CodeCoverage.run("createLandRegions");
+                
                 candidateTileTypes.remove(i);
                 continue;
             }
-            CodeCoverage.run("createLandRegions");
+            
             i++;
         }
-        CodeCoverage.run("createLandRegions");
+        
 
         // Need to continue?
         switch (candidateTileTypes.size()) {
         case 0:
-            CodeCoverage.run("createLandRegions");
+            
             // CodeCoverage.print();
             throw new RuntimeException("No TileType for"
                 + " humidity==" + localeHumidity);
         case 1:
-            CodeCoverage.run("createLandRegions");
+            
             // CodeCoverage.print();
             return first(candidateTileTypes);
         default:
-            CodeCoverage.run("createLandRegions");
+            
             break;
         }
-        CodeCoverage.run("createLandRegions");
+        
 
         // Filter the candidates by forest presence.
         boolean forested = randomInt(logger, "Forest", random, 100) < forestChance;
         i = 0;
         while (i < candidateTileTypes.size()) {
-            CodeCoverage.run("createLandRegions");
+            
             TileType type = candidateTileTypes.get(i);
             if (type.isForested() != forested) {
-                CodeCoverage.run("createLandRegions");
+                
                 candidateTileTypes.remove(i);
                 continue;
             }
-            CodeCoverage.run("createLandRegions");
+            
             i++;
         }
-        CodeCoverage.run("createLandRegions");
+        
 
         // Done
         switch (i = candidateTileTypes.size()) {
         case 0:
-            CodeCoverage.run("createLandRegions");
+            
             // CodeCoverage.print();
             throw new RuntimeException("No TileType for"
                 + " forested==" + forested);
         case 1:
-            CodeCoverage.run("createLandRegions");
+            
             // CodeCoverage.print();
             return first(candidateTileTypes);
         default:
-            CodeCoverage.run("createLandRegions");
+            
             // CodeCoverage.print();
             return candidateTileTypes.get(randomInt(logger, "Forest tile",
                                                     random, i));
@@ -339,82 +339,191 @@ public class TerrainGenerator {
      * @param lb A {@code LogBuilder} to log to.
      * @return A list of created {@code ServerRegion}s.
      */
-    private List<ServerRegion> createLandRegions(Map map, LogBuilder lb) {
-        // Create "explorable" land regions
-        final Game game = map.getGame();
-        int continents = 0;
-        boolean[][] landmap = new boolean[map.getWidth()][map.getHeight()];
-        int[][] continentmap = new int[map.getWidth()][map.getHeight()];
-        int landsize = 0;
 
-        // Initialize both maps
-        CodeCoverage.run("createLandRegions");
+    private boolean[][] initializeLandMap(Map map) {
+        boolean[][] landmap = new boolean[map.getWidth()][map.getHeight()];
         for (int x = 0; x < map.getWidth(); x++) {
-            CodeCoverage.run("createLandRegions");
             for (int y = 0; y < map.getHeight(); y++) {
-                CodeCoverage.run("createLandRegions");
-                continentmap[x][y] = 0;
                 landmap[x][y] = false;
                 if (map.isValid(x, y)) {
-                    CodeCoverage.run("createLandRegions");
                     Tile tile = map.getTile(x, y);
                     // Exclude existing regions (arctic/antarctic, mountains,
                     // rivers).
                     landmap[x][y] = tile.isLand()
                         && tile.getRegion() == null;
-                    if (tile.isLand()) {CodeCoverage.run("createLandRegions"); landsize++;};
-                    CodeCoverage.run("createLandRegions");
                 }
-                CodeCoverage.run("createLandRegions");
             }
-            CodeCoverage.run("createLandRegions");
         }
-        CodeCoverage.run("createLandRegions");
+        return landmap;
+    } 
+
+    private int[][] initializeContinentMap(Map map) {
+        int[][] continentmap = new int[map.getWidth()][map.getHeight()];
+
+        for (int x = 0; x < map.getWidth(); x++) {
+            for (int y = 0; y < map.getHeight(); y++) {
+                continentmap[x][y] = 0;                
+            }
+        }
+        return continentmap;
+    }
+
+    private int getLandSize(Map map) {
+        int landsize = 0;
+
+        for (int x = 0; x < map.getWidth(); x++) {
+            for (int y = 0; y < map.getHeight(); y++) {
+                if (map.isValid(x, y)) {
+                    Tile tile = map.getTile(x, y);
+                    if (tile.isLand()) { landsize++;};
+                }
+            }
+        }
+
+        return landsize;
+    }
+
+    private class Continents {
+        public int[][] map;
+        public int continents;
+    }
+
+    private Continents partitionIntoContinents(Map map) {
+        boolean[][] landmap = this.initializeLandMap(map);
+        int[][] continentmap = this.initializeContinentMap(map);
+        int continents = 0;
 
         // Flood fill, so that we end up with individual landmasses
         // numbered in continentmap[][]
         for (int y = 0; y < map.getHeight(); y++) {
-            CodeCoverage.run("createLandRegions");
             for (int x = 0; x < map.getWidth(); x++) {
-                CodeCoverage.run("createLandRegions");
                 if (landmap[x][y]) { // Found a new region.
-                    CodeCoverage.run("createLandRegions");
                     continents++;
                     boolean[][] continent = Map.floodFillBool(landmap, x, y);
 
                     for (int yy = 0; yy < map.getHeight(); yy++) {
-                        CodeCoverage.run("createLandRegions");
                         for (int xx = 0; xx < map.getWidth(); xx++) {
-                            CodeCoverage.run("createLandRegions");
                             if (continent[xx][yy]) {
-                                CodeCoverage.run("createLandRegions");
                                 continentmap[xx][yy] = continents;
                                 landmap[xx][yy] = false;
                             }
-                            CodeCoverage.run("createLandRegions");
                         }
-                        CodeCoverage.run("createLandRegions");
                     }
-                    CodeCoverage.run("createLandRegions");
                 }
-                CodeCoverage.run("createLandRegions");
             }
-            CodeCoverage.run("createLandRegions");
         }
-        CodeCoverage.run("createLandRegions");
-        lb.add("Number of individual landmasses is ", continents, "\n");
+
+        Continents result = new Continents();
+        result.map = continentmap;
+        result.continents = continents;
+
+        return result;
+    }
+
+    private int[] getContinentSizes(Map map, Continents continentData) {
+        int continents = continentData.continents;
+        int[][] continentmap = continentData.map;
 
         // Get landmass sizes
         int[] continentsize = new int[continents+1];
         for (int y = 0; y < map.getHeight(); y++) {
-            CodeCoverage.run("createLandRegions");
             for (int x = 0; x < map.getWidth(); x++) {
-                CodeCoverage.run("createLandRegions");
                 continentsize[continentmap[x][y]]++;
             }
-            CodeCoverage.run("createLandRegions");
         }
-        CodeCoverage.run("createLandRegions");
+
+        return continentsize;
+    }
+
+    private Continents splitBigContinent(Map map, Continents continentData, int continentMarker, int[] continentsize) {
+        int continents = continentData.continents;
+        int[][] continentmap = continentData.map;
+
+        boolean[][] splitcontinent
+            = new boolean[map.getWidth()][map.getHeight()];
+        int splitX = 0, splitY = 0;
+
+        for (int x = 0; x < map.getWidth(); x++) {
+            for (int y = 0; y < map.getHeight(); y++) {
+                if (continentmap[x][y] == continentMarker) {
+                    splitcontinent[x][y] = true;
+                    splitX = x; splitY = y;
+                } else {
+                    splitcontinent[x][y] = false;
+                }
+            }
+        }
+        
+        while (continentsize[continentMarker] > LAND_REGION_MAX_SIZE) {
+            int targetsize = LAND_REGION_MAX_SIZE;
+            
+            if (continentsize[continentMarker] < 2*LAND_REGION_MAX_SIZE) {
+                
+                targetsize = continentsize[continentMarker]/2;
+            }
+            
+            continents++; //index of the new region in continentmap[][]
+            boolean[][] newregion = Map.floodFillBool(splitcontinent,
+                splitX, splitY, targetsize);
+            for (int x = 0; x < map.getWidth(); x++) {
+                for (int y = 0; y < map.getHeight(); y++) {
+                    if (newregion[x][y]) {
+                        continentmap[x][y] = continents;
+                        splitcontinent[x][y] = false;
+                        continentsize[continentMarker]--;
+                    }
+                    if (splitcontinent[x][y]) {   
+                        splitX = x; splitY = y;
+                    }
+                }
+            }
+        }
+
+        continentData.map = continentmap;
+        continentData.continents = continents;
+        
+        return continentData;
+    }
+
+    private ServerRegion[] generateLandRegions(Game game, Map map, Continents continentData) {
+        int continents = continentData.continents;
+        ServerRegion[] landregions = new ServerRegion[continents+1];
+        for (int c = 1; c <= continents; c++) {
+            // c starting at 1, c=0 is all water tiles
+            landregions[c] = new ServerRegion(game, RegionType.LAND);
+        }
+        return landregions;
+    }
+
+    private ServerRegion[] addTilesToLandRegions(Map map, Continents continentData, ServerRegion[] landregions) {
+        int[][] continentmap = continentData.map;
+
+        // Add tiles to ServerRegions
+        for (int y = 0; y < map.getHeight(); y++) {
+            for (int x = 0; x < map.getWidth(); x++) {
+                if (continentmap[x][y] > 0) {
+                    Tile tile = map.getTile(x, y);
+                    landregions[continentmap[x][y]].addTile(tile);
+                }   
+            }
+        }
+
+        return landregions;
+    }
+
+    private List<ServerRegion> createLandRegions(Map map, LogBuilder lb) {
+        // Create "explorable" land regions
+        final Game game = map.getGame();
+        int landsize = this.getLandSize(map);
+        
+        Continents continentData = this.partitionIntoContinents(map);
+        int continents = continentData.continents;
+        int[][] continentmap = continentData.map;
+
+        lb.add("Number of individual landmasses is ", continents, "\n");
+
+        // Get landmass sizes
+        int[] continentsize = this.getContinentSizes(map, continentData);
 
         // Go through landmasses, split up those too big
         int oldcontinents = continents;
@@ -423,92 +532,23 @@ public class TerrainGenerator {
             // c starting at 1, c=0 is all excluded tiles
             if (continentsize[c] > LAND_REGION_MAX_SIZE) {
                 CodeCoverage.run("createLandRegions");
-                boolean[][] splitcontinent
-                    = new boolean[map.getWidth()][map.getHeight()];
-                int splitX = 0, splitY = 0;
-
-                for (int x = 0; x < map.getWidth(); x++) {
-                    CodeCoverage.run("createLandRegions");
-                    for (int y = 0; y < map.getHeight(); y++) {
-                        CodeCoverage.run("createLandRegions");
-                        if (continentmap[x][y] == c) {
-                            CodeCoverage.run("createLandRegions");
-                            splitcontinent[x][y] = true;
-                            splitX = x; splitY = y;
-                        } else {
-                            CodeCoverage.run("createLandRegions");
-                            splitcontinent[x][y] = false;
-                        }
-                        CodeCoverage.run("createLandRegions");
-                    }
-                    CodeCoverage.run("createLandRegions");
-                }
-                CodeCoverage.run("createLandRegions");
-
-                while (continentsize[c] > LAND_REGION_MAX_SIZE) {
-                    int targetsize = LAND_REGION_MAX_SIZE;
-                    CodeCoverage.run("createLandRegions");
-                    if (continentsize[c] < 2*LAND_REGION_MAX_SIZE) {
-                        CodeCoverage.run("createLandRegions");
-                        targetsize = continentsize[c]/2;
-                    }
-                    CodeCoverage.run("createLandRegions");
-                    continents++; //index of the new region in continentmap[][]
-                    boolean[][] newregion = Map.floodFillBool(splitcontinent,
-                        splitX, splitY, targetsize);
-                    for (int x = 0; x < map.getWidth(); x++) {
-                        CodeCoverage.run("createLandRegions");
-                        for (int y = 0; y < map.getHeight(); y++) {
-
-                            if (newregion[x][y]) {
-                                CodeCoverage.run("createLandRegions");
-                                continentmap[x][y] = continents;
-                                splitcontinent[x][y] = false;
-                                continentsize[c]--;
-                            }
-                            CodeCoverage.run("createLandRegions");
-                            if (splitcontinent[x][y]) {
-                                CodeCoverage.run("createLandRegions");
-                                splitX = x; splitY = y;
-                            }
-                            CodeCoverage.run("createLandRegions");
-                        }
-                        CodeCoverage.run("createLandRegions");
-                    }
-                    CodeCoverage.run("createLandRegions");
-                }
-                CodeCoverage.run("createLandRegions");
+                continentData = this.splitBigContinent(map, continentData, c, continentsize);
+            } else {
+                CodeCoverage.run("createLandRegions");    
             }
-            CodeCoverage.run("createLandRegions");
         }
         CodeCoverage.run("createLandRegions");
+
+        continents = continentData.continents;
+        continentmap = continentData.map;
+
         lb.add("Number of land regions being created: ", continents, "\n");
 
         // Create ServerRegions for all land regions
-        ServerRegion[] landregions = new ServerRegion[continents+1];
-        int landIndex = 1;
-        for (int c = 1; c <= continents; c++) {
-            CodeCoverage.run("createLandRegions");
-            // c starting at 1, c=0 is all water tiles
-            landregions[c] = new ServerRegion(game, RegionType.LAND);
-        }
-        CodeCoverage.run("createLandRegions");
+        ServerRegion[] landregions = this.generateLandRegions(game, map, continentData);
 
         // Add tiles to ServerRegions
-        for (int y = 0; y < map.getHeight(); y++) {
-            CodeCoverage.run("createLandRegions");
-            for (int x = 0; x < map.getWidth(); x++) {
-                CodeCoverage.run("createLandRegions");
-                if (continentmap[x][y] > 0) {
-                    CodeCoverage.run("createLandRegions");
-                    Tile tile = map.getTile(x, y);
-                    landregions[continentmap[x][y]].addTile(tile);
-                }
-                CodeCoverage.run("createLandRegions");
-            }
-            CodeCoverage.run("createLandRegions");
-        }
-        CodeCoverage.run("createLandRegions");
+        landregions = this.addTilesToLandRegions(map, continentData, landregions);
 
         for (int c = 1; c <= continents; c++) {
             CodeCoverage.run("createLandRegions");
