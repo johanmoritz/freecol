@@ -46,6 +46,12 @@ public class BaseCostDeciderTest extends FreeColTestCase {
         = spec().getUnitType("model.unit.galleon");
     private static final UnitType pioneerType
         = spec().getUnitType("model.unit.hardyPioneer");
+    // Added for Scout
+    private static final Role scoutRole
+            = spec().getRole("model.role.scout");
+
+    private static final UnitType scoutType
+            = spec().getUnitType("model.unit.seasonedScout");
     
     private Game game;
 
@@ -278,6 +284,7 @@ public class BaseCostDeciderTest extends FreeColTestCase {
 
         CostDecider base = CostDeciders.avoidIllegal();
         int cost;
+        // nytt test
 
         // try old location europe 65,71
         Player dutch = game.getPlayerByNationId("model.nation.dutch");
@@ -296,6 +303,13 @@ public class BaseCostDeciderTest extends FreeColTestCase {
         cost = base.getCost(unit, unitTile, amsterdam, 10);
         assertEquals("Move should be invalid, trying with invalid char",
                 CostDecider.ILLEGAL_MOVE, cost);
+        // test 4 enter indian settlement with scout, line 139
+        Unit scout = new ServerUnit(game, galleon, dutch,
+                scoutType, scoutRole);
+        cost = base.getCost(scout, unitTile, settlementTile, 4);
+        assertEquals("Valid move, ENTER_INDIAN_SETTLEMENT_WITH_SCOUT ",
+                cost, cost);
+
 
     }
 }
