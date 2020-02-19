@@ -37,11 +37,13 @@ In conclusiong, Yes, we plan to continue using this project.
 ## Coverage
 
 ### Tools
-
+<!-- 
 Document your experience in using a "new"/different coverage tool.
 
 How well was the tool documented? Was it possible/easy/difficult to
-integrate it with your build environment?
+integrate it with your build environment? -->
+
+We used OpenClover to get code coverage for the project. This was a fairly straightforward installation and setup proccess but it relied on quite a bit of search-engine-luck to get everything running smoothly. OpenClover has a library (as a `.jar` file) made directly for the ant build system as well as a "two-liner" setup for any ant project. It took us some time to figure out where to put the library on our system and also how where in the build.xml file to put this "two-liner". Thankfully the FreeCol project is setup in a really nice, modular way so as soon as we found the correct placement of the setup, all test commands could be used together with OpenClover and a bunch of OpenClover commands showed up as tasks when listing them with `ant`.
 
 ### DYI
 
