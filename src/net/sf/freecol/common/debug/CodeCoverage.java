@@ -9,17 +9,17 @@ public class CodeCoverage {
   public static HashMap<String, HashMap<Integer, Integer>> functions = new HashMap<>();
   public static HashMap<String, Integer> branchCounts = new HashMap<String, Integer>() {
       {
-          put("initializeCaches", 21);
+          put("initializeCaches", 23);
           put("writeChildren", 38);
           put("readChild", 28);
           put("setLocation", 27);
-          put("getDefaultDisplay", 23);
-          put("updateTileImprovementPlans", 20);
+          put("getDefaultDisplay", 22);
+          put("updateTileImprovementPlans", 25);
           put("readOption", 20);
           put("actionIsValid", 16);
-          put("createLandRegions", 71);
+          put("createLandRegions", 86);
           put("findMapPath", 14);
-          put("getCost", 25);
+          put("getCost", 27);
       }
   };
   public static void run(String functionName) {
