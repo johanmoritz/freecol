@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    
+    
+    <link rel="SHORTCUT ICON" href="img/clover.ico" />
+
+    <link rel="stylesheet" href="aui/css/aui.min.css" media="all"/>
+    <link rel="stylesheet" href="aui/css/aui-experimental.min.css" media="all"/>
+    <!--[if IE 9]><link rel="stylesheet" href="aui/css/aui-ie9.min.css" media="all"/><![endif]-->
+
+    <style type="text/css" media="all">
+        @import url('style.css');
+        @import url('tree.css');
+        
+    </style>
+
+    <script src="jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="aui/js/aui.min.js" type="text/javascript"></script>
+    <script src="aui/js/aui-experimental.min.js" type="text/javascript"></script>
+    <script src="aui/js/aui-soy.min.js" type="text/javascript"></script>
+
+    <script src="package-nodes-tree.js" type="text/javascript"></script>
+    <script src="clover-tree.js" type="text/javascript"></script>
+    <script src="clover.js" type="text/javascript"></script>
+    <script src="clover-descriptions.js" type="text/javascript"></script>
+    <script src="cloud.js" type="text/javascript"></script>
+
+            <title>FreeCol</title>
+    </head>
+
+<body onresize="processTreeMapDashJson(treeMapJson);" >
+    <div id="page">
+        
+        
+
+
+<header id="header" role="banner">
+    <nav class="aui-header aui-dropdown2-trigger-group" role="navigation">
+        <div class="aui-header-inner">
+            <div class="aui-header-primary">
+                <h1 id="logo" class="aui-header-logo aui-header-logo-clover">
+                    <a href="http://openclover.org" title="Visit OpenClover home page"><span class="aui-header-logo-device">OpenClover</span></a>
+                </h1>
+                                <ul class="aui-nav">
+                    <li>
+                        <a href="#dropdown2-jira3" aria-owns="dropdown2-jira3" aria-haspopup="true"
+                           class="aui-dropdown2-trigger" aria-controls="dropdown2-header7">
+                            Linked reports
+                            <span class="aui-icon-dropdown"></span>
+                        </a>
+
+                        <div class="aui-dropdown2 aui-style-default aui-dropdown2-in-header" id="dropdown2-jira3"
+                             style="display: none; top: 40px; min-width: 160px; left: 1213px; " aria-hidden="true">
+                            <div class="aui-dropdown2-section">
+                                <ul>
+                                                                                                                <li><a href="historical.html">FreeCol-Historical</a></li>
+                                                                    </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                            </div>
+            <div class="aui-header-secondary">
+                <ul class="aui-nav">
+                    <li id="system-help-menu">
+                        <a class="aui-nav-link" title="Open online documentation" target="_blank"
+                           href="http://openclover.org/documentation">
+                            <span class="aui-icon aui-icon-small aui-iconfont-help">&#160;Help</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+        
+        <div class="aui-page-panel">
+            <div class="aui-page-panel-inner">
+                <div class="aui-page-panel-nav aui-page-panel-nav-clover">
+                    
+
+<div class="aui-page-header-inner" style="margin-bottom: 20px;">
+    <div class="aui-page-header-image">
+                <div class="aui-avatar aui-avatar-large aui-avatar-project">
+            <div class="aui-avatar-inner">
+                                    <img src="img/clover_logo_large.png" alt="Clover icon"/>
+                            </div>
+        </div>
+            </div>
+    <div class="aui-page-header-main" >
+        <h1>
+                                        FreeCol
+                                </h1>
+    </div>
+</div>
+
+<nav class="aui-navgroup aui-navgroup-vertical">
+    <div class="aui-navgroup-inner">
+                                            <ul class="aui-nav">
+                <li class="aui-nav-selected">
+                    <a href="dashboard.html">Project overview</a>
+                </li>
+            </ul>
+        
+                <div class="aui-nav-heading packages-nav-heading">
+            <strong>Packages</strong>
+        </div>
+        <div class="aui-nav project-packages">
+            <form method="get" action="#" class="aui package-filter-container">
+                <input type="text" autocomplete="off" class="package-filter text"
+                       placeholder="Type to filter packages..." name="package-filter" id="package-filter"
+                       title="Start typing package name (or part of the name) to search through the tree. Use arrow keys and the Enter key to navigate."/>
+            </form>
+            <p class="package-filter-no-results-message hidden">
+                <small>No results found.</small>
+            </p>
+                                                  <div class="packages-tree-wrapper" data-root-relative="" data-package-name="">
+                <div class="packages-tree-container"></div>
+                <div class="clover-packages-lozenges"></div>
+            </div>
+        </div>
+        
+            </div>
+</nav>                </div>
+                <section class="aui-page-panel-content">
+                    <div class="aui-page-panel-content-clover">
+
+                    
+                    <ol class="aui-nav aui-nav-breadcrumbs">
+            
+        <li><a href="dashboard.html">Project Clover database ons feb. 19 2020 15:31:55 CET</a></li>
+    </ol>
+    
+<h1 class="aui-h2-clover">
+            Project overview
+    </h1>
+<div class="aui-tabs horizontal-tabs">
+        <ul class="tabs-menu">
+            <li class="menu-item active-tab">
+            <a href="dashboard.html">Dashboard</a>
+        </li>
+                <li class="menu-item ">
+            <a href="pkg-summary.html"><strong>Application code</strong></a>
+        </li>
+                <li class="menu-item ">
+            <a href="testsrc-pkg-summary.html"><strong>Test code</strong></a>
+        </li>
+        <li class="menu-item ">
+            <a href="test-pkg-summary.html"><strong>Test results</strong></a>
+        </li>
+                <li class="menu-item ">
+            <a href="top-risks.html"><strong>Top risks</strong></a>
+        </li>
+        <li class="menu-item ">
+            <a href="quick-wins.html"><strong>Quick wins</strong></a>
+        </li>
+                                                <li class="menu-item ">
+                <a href="treemap.html"><strong>Coverage tree map</strong></a>
+            </li>
+            </ul>
+    <div class="tabs-pane active-pane" id="tabs-first">
+
+        <div>&#160;</div>
+
+
+
+
+
+
+<div class="aui-group">
+    <div class="aui-item">
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                
+                <h3>
+                    Code coverage
+                    <small style="float:right; font-weight: normal">
+                        38 classes,
+                        4 945 /
+                        9 086 elements
+                    </small>
+                </h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.5442439</span>54,4%</div><div style="display: table-cell">
+ <div title="54,4% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:54.4%"></div></div></div></div>
+                <p><a href="pkg-summary.html">See more</a></p>
+            </div>
+        </div>
+
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>
+                    Test results
+                    <small style="float:right; font-weight: normal">
+                        296 /
+                        296 tests
+                        13,94 secs
+                    </small>
+                </h3>
+            </header>
+            <div class="dashboard-widget-content">
+                                    
+
+<div style="display: table; width: 100%">
+            <div class="barGraphValue"><span class="sortValue">1.0</span>100%</div>         <div style="display: table-cell">
+            
+            <div title="0% Errors" style="min-width: 40px;" class="testBarError">
+                <div title="100% of tests passed&lt;br/&gt;0% of tests failed" class="testBarFail" style="width: 100%"><div class="testBarPass" style="width: 100%"></div></div>
+            </div>
+        </div>
+    </div>                                <p><a href="test-pkg-summary.html">See more</a></p>
+            </div>
+        </div>
+
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Code metrics</h3>
+            </header>
+                         
+
+<div id="$statsId" class="aui-item" style="display: ${display}">
+<div style="display: table">
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of branches in this project">Branches:</label></div>
+        <div class="stats-box-value">2 546</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of statements in this project">Statements:</label></div>
+        <div class="stats-box-value">5 610</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of methods in this project">Methods:</label></div>
+        <div class="stats-box-value">930</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of classes in this project">Classes:</label></div>
+        <div class="stats-box-value">38</div>
+    </div>
+            <div class="stats-box">
+            <div class="stats-box-label"><label title="Total number of files in this project">Files:</label></div>
+            <div class="stats-box-value">15</div>
+        </div>
+                <div class="stats-box">
+            <div class="stats-box-label"><label title="Total number of packages in this project">Packages:</label></div>
+            <div class="stats-box-value">8</div>
+        </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of lines of code in this project">LOC:</label></div>
+        <div class="stats-box-value">19 194</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of non-comment lines of code in this project">NCLOC:</label></div>
+        <div class="stats-box-value">10 326</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Cyclomatic complexity is the number of paths in this project">Total complexity:</label></div>
+        <div class="stats-box-value">2 620</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label">
+            <label title="Complexity density is the complexity divided by the number of statements in this project">Complexity density:</label>
+        </div>
+        <div class="stats-box-value">0,47</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of statements per method.">Statements/Method:</label></div>
+        <div class="stats-box-value">6,03</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of methods per class.">Methods/Class:</label></div>
+        <div class="stats-box-value">24,47</div>
+    </div>
+            <div class="stats-box">
+            <div class="stats-box-label"><label title="Number of classes per package.">Classes/Package:</label></div>
+            <div class="stats-box-value">4,75</div>
+        </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Complexity divided by the number of methods in this project">Average method complexity:</label></div>
+        <div class="stats-box-value">2,82</div>
+    </div>
+</div>
+
+</div>        </div>
+
+                <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Class Coverage Distribution</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <div style="text-align: center">                     <img src="img/classDistrubutionChart.png" alt="img/classDistrubutionChart.png" usemap="#classDistrubutionChart.png"/>
+                </div>
+                <map id="classDistrubutionChart.png" name="classDistrubutionChart.png">
+<area shape="rect" coords="288,130,310,206" title="4 classes have 91-100% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="263,168,285,206" title="2 classes have 81-90% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="238,111,260,206" title="5 classes have 71-80% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="213,149,235,206" title="3 classes have 61-70% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="188,168,210,206" title="2 classes have 51-60% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="163,168,185,206" title="2 classes have 41-50% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="138,168,160,206" title="2 classes have 31-40% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="113,168,135,206" title="2 classes have 21-30% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="38,15,60,206" title="10 classes have 0% coverage" alt="" nohref="nohref"/>
+</map>
+            </div>
+        </div>
+        
+                <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Class Complexity</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <div style="text-align: center">
+                    <img src="img/classComplexityChart.png" alt="img/classComplexityChart.png" usemap="#classComplexityChart.png"/>
+                </div>
+                <map id="classComplexityChart.png" name="classComplexityChart.png">
+<area shape="poly" coords="298,208,296,211,293,208,296,206,298,208,298,208" title="Complexity: 3; Coverage: 100%; Class: AllTests" alt="" href="net/sf/freecol/AllTests.html#AllTests"/>
+<area shape="poly" coords="237,189,235,191,232,189,235,186,237,189,237,189" title="Complexity: 79; Coverage: 75%; Class: Scope" alt="" href="net/sf/freecol/common/model/Scope.html#Scope"/>
+<area shape="poly" coords="298,209,296,211,293,209,296,206,298,209,298,209" title="Complexity: 1; Coverage: 100%; Class: AllTests" alt="" href="net/sf/freecol/common/model/AllTests.html#AllTests"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 3; Coverage: 0%; Class: Player.NoClaimReason" alt="" href="net/sf/freecol/common/model/Player.html#Player.NoClaimReason"/>
+<area shape="poly" coords="54,207,51,210,49,207,51,205,54,207,54,207" title="Complexity: 6; Coverage: 0%; Class: Player.NoValueType" alt="" href="net/sf/freecol/common/model/Player.html#Player.NoValueType"/>
+<area shape="poly" coords="54,209,51,211,49,209,51,206,54,209,54,209" title="Complexity: 1; Coverage: 0%; Class: Player.ColonyValueCategory" alt="" href="net/sf/freecol/common/model/Player.html#Player.ColonyValueCategory"/>
+<area shape="poly" coords="164,72,161,75,159,72,161,70,164,72,164,72" title="Complexity: 530; Coverage: 45%; Class: Player" alt="" href="net/sf/freecol/common/model/Player.html#Player"/>
+<area shape="poly" coords="152,208,149,210,147,208,149,205,152,208,152,208" title="Complexity: 5; Coverage: 40%; Class: Monarch.MonarchAction" alt="" href="net/sf/freecol/common/model/Monarch.html#Monarch.MonarchAction"/>
+<area shape="poly" coords="178,176,176,179,173,176,176,174,178,176,178,176" title="Complexity: 126; Coverage: 51%; Class: Monarch" alt="" href="net/sf/freecol/common/model/Monarch.html#Monarch"/>
+<area shape="poly" coords="205,207,203,210,200,207,203,205,205,207,205,207" title="Complexity: 7; Coverage: 62%; Class: Unit.MoveType" alt="" href="net/sf/freecol/common/model/Unit.html#Unit.MoveType"/>
+<area shape="poly" coords="54,209,51,211,49,209,51,206,54,209,54,209" title="Complexity: 1; Coverage: 0%; Class: Player.ColonyValueCategory" alt="" href="net/sf/freecol/common/model/Player.html#Player.ColonyValueCategory"/>
+<area shape="poly" coords="257,206,254,209,252,206,254,204,257,206,257,206" title="Complexity: 11; Coverage: 83%; Class: Unit.ClosestSettlementGoalDecider" alt="" href="net/sf/freecol/common/model/Unit.html#Unit.ClosestSettlementGoalDecider"/>
+<area shape="poly" coords="205,18,203,20,200,18,203,15,205,18,205,18" title="Complexity: 741; Coverage: 62%; Class: Unit" alt="" href="net/sf/freecol/common/model/Unit.html#Unit"/>
+<area shape="poly" coords="242,206,240,208,237,206,240,203,242,206,242,206" title="Complexity: 13; Coverage: 77%; Class: Map.MoveCandidate" alt="" href="net/sf/freecol/common/model/Map.html#Map.MoveCandidate"/>
+<area shape="poly" coords="235,204,232,206,230,204,232,201,235,204,235,204" title="Complexity: 20; Coverage: 74%; Class: Map.CircleIterator" alt="" href="net/sf/freecol/common/model/Map.html#Map.CircleIterator"/>
+<area shape="poly" coords="240,204,237,206,235,204,237,201,240,204,240,204" title="Complexity: 21; Coverage: 76%; Class: Map.Position" alt="" href="net/sf/freecol/common/model/Map.html#Map.Position"/>
+<area shape="poly" coords="213,105,210,108,208,105,210,103,213,105,213,105" title="Complexity: 402; Coverage: 65%; Class: Map" alt="" href="net/sf/freecol/common/model/Map.html#Map"/>
+<area shape="poly" coords="115,208,112,210,110,208,112,205,115,208,115,208" title="Complexity: 4; Coverage: 25%; Class: ModelMessage.MessageType" alt="" href="net/sf/freecol/common/model/ModelMessage.html#ModelMessage.MessageType"/>
+<area shape="poly" coords="129,190,127,192,124,190,127,187,129,190,129,190" title="Complexity: 75; Coverage: 31%; Class: ModelMessage" alt="" href="net/sf/freecol/common/model/ModelMessage.html#ModelMessage"/>
+<area shape="poly" coords="237,202,235,204,232,202,235,199,237,202,237,202" title="Complexity: 29; Coverage: 75%; Class: BaseCostDecider" alt="" href="net/sf/freecol/common/model/pathfinding/BaseCostDecider.html#BaseCostDecider"/>
+<area shape="poly" coords="276,176,274,178,271,176,274,173,276,176,276,176" title="Complexity: 128; Coverage: 91%; Class: TerrainGenerator" alt="" href="net/sf/freecol/server/generator/TerrainGenerator.html#TerrainGenerator"/>
+<area shape="poly" coords="115,157,112,159,110,157,112,154,115,157,115,157" title="Complexity: 203; Coverage: 25%; Class: AIColony" alt="" href="net/sf/freecol/server/ai/AIColony.html#AIColony"/>
+<area shape="poly" coords="54,207,51,210,49,207,51,205,54,207,54,207" title="Complexity: 7; Coverage: 0%; Class: BuildQueuePanel.DefaultBuildQueueCellRenderer" alt="" href="net/sf/freecol/client/gui/panel/BuildQueuePanel.html#BuildQueuePanel.DefaultBuildQueueCellRenderer"/>
+<area shape="poly" coords="54,205,51,208,49,205,51,203,54,205,54,205" title="Complexity: 14; Coverage: 0%; Class: BuildQueuePanel.BuildQueueMouseAdapter" alt="" href="net/sf/freecol/client/gui/panel/BuildQueuePanel.html#BuildQueuePanel.BuildQueueMouseAdapter"/>
+<area shape="poly" coords="54,207,51,210,49,207,51,205,54,207,54,207" title="Complexity: 6; Coverage: 0%; Class: Player.NoValueType" alt="" href="net/sf/freecol/common/model/Player.html#Player.NoValueType"/>
+<area shape="poly" coords="54,201,51,203,49,201,51,198,54,201,54,201" title="Complexity: 31; Coverage: 0%; Class: BuildQueuePanel.BuildQueueTransferHandler" alt="" href="net/sf/freecol/client/gui/panel/BuildQueuePanel.html#BuildQueuePanel.BuildQueueTransferHandler"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 3; Coverage: 0%; Class: Player.NoClaimReason" alt="" href="net/sf/freecol/common/model/Player.html#Player.NoClaimReason"/>
+<area shape="poly" coords="54,189,51,192,49,189,51,187,54,189,54,189" title="Complexity: 77; Coverage: 0%; Class: BuildQueuePanel" alt="" href="net/sf/freecol/client/gui/panel/BuildQueuePanel.html#BuildQueuePanel"/>
+<area shape="poly" coords="171,206,169,209,166,206,169,204,171,206,171,206" title="Complexity: 10; Coverage: 48%; Class: AudioMixerOption.MixerWrapper" alt="" href="net/sf/freecol/common/option/AudioMixerOption.html#AudioMixerOption.MixerWrapper"/>
+<area shape="poly" coords="191,204,188,206,186,204,188,201,191,204,191,204" title="Complexity: 20; Coverage: 56%; Class: AudioMixerOption" alt="" href="net/sf/freecol/common/option/AudioMixerOption.html#AudioMixerOption"/>
+<area shape="poly" coords="264,200,262,203,259,200,262,198,264,200,264,200" title="Complexity: 33; Coverage: 86%; Class: AbstractOption" alt="" href="net/sf/freecol/common/option/AbstractOption.html#AbstractOption"/>
+<area shape="poly" coords="286,206,284,209,281,206,284,204,286,206,286,206" title="Complexity: 10; Coverage: 95%; Class: CodeCoverage" alt="" href="net/sf/freecol/common/debug/CodeCoverage.html#CodeCoverage"/>
+</map>
+            </div>
+        </div>
+        
+                    <div class="dashboard-widget">
+                <header class="dashboard-widget-header">
+                    <h3>Coverage tree map</h3>
+                </header>
+                <div class="dashboard-widget-content">
+                    <div id="infovis" style="width:100%; height:250px;">
+                        <div id="treemap-loader" style="position:relative;top:50px;">
+                            <p>
+                                Generating Coverage Tree Map. Please wait...
+                            </p>
+                            <p>
+                                <img src="img/ajax-loader.gif" alt="Loading Treemap"/>
+                            </p>
+                        </div>
+                    </div>
+                    <p><a href="treemap.html">See more</a></p>
+                </div>
+
+            </div>
+            </div>
+
+
+    <div class="aui-item">
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Top 20 project risks</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                
+                                                                <a class="tag" href="net/sf/freecol/server/generator/TerrainGenerator.html"
+                            style="font-size: 28px;color:#89c495"
+                            title="Average Method Complexity - 8,533 , Coverage - 91,2% ">TerrainGenerator</a>
+                                    
+                                                                <a class="tag" href="net/sf/freecol/common/model/pathfinding/BaseCostDecider.html"
+                            style="font-size: 25px;color:#fae1a0"
+                            title="Average Method Complexity - 7,25 , Coverage - 75,2% ">BaseCostDecider</a>
+                                    
+                                                                <a class="tag" href="net/sf/freecol/common/option/AbstractOption.html"
+                            style="font-size: 17px;color:#14892c"
+                            title="Average Method Complexity - 3 , Coverage - 86% ">AbstractOption</a>
+                                    
+                                                                <a class="tag" href="net/sf/freecol/common/model/Map.html"
+                            style="font-size: 19px;color:#f6c342"
+                            title="Average Method Complexity - 3,941 , Coverage - 65,3% ">Map</a>
+                                    
+                                                                <a class="tag" href="net/sf/freecol/common/debug/CodeCoverage.html"
+                            style="font-size: 15px;color:#89c495"
+                            title="Average Method Complexity - 2 , Coverage - 95% ">CodeCoverage</a>
+                                    
+                                                                <a class="tag" href="net/sf/freecol/common/model/Unit.html"
+                            style="font-size: 17px;color:#14892c"
+                            title="Average Method Complexity - 2,75 , Coverage - 83,3% ">Unit.ClosestSettlementGoalDecider</a>
+                                    
+                                                                <a class="tag" href="net/sf/freecol/common/model/Scope.html"
+                            style="font-size: 17px;color:#fae1a0"
+                            title="Average Method Complexity - 3,038 , Coverage - 75,4% ">Scope</a>
+                                    
+                                                                <a class="tag" href="net/sf/freecol/common/model/Map.html"
+                            style="font-size: 18px;color:#fae1a0"
+                            title="Average Method Complexity - 3,333 , Coverage - 74,7% ">Map.CircleIterator</a>
+                                    
+                                                                <a class="tag" href="net/sf/freecol/common/model/Monarch.html"
+                            style="font-size: 18px;color:#e7a19b"
+                            title="Average Method Complexity - 3,6 , Coverage - 51,4% ">Monarch</a>
+                                    
+                                                                <a class="tag" href="net/sf/freecol/common/model/Map.html"
+                            style="font-size: 15px;color:#fae1a0"
+                            title="Average Method Complexity - 1,857 , Coverage - 77,8% ">Map.MoveCandidate</a>
+                                    
+                                                                <a class="tag" href="net/sf/freecol/common/model/Unit.html"
+                            style="font-size: 17px;color:#f6c342"
+                            title="Average Method Complexity - 2,807 , Coverage - 62,1% ">Unit</a>
+                                    
+                                                                <a class="tag" href="net/sf/freecol/client/gui/panel/BuildQueuePanel.html"
+                            style="font-size: 25px;color:#d04437"
+                            title="Average Method Complexity - 7 , Coverage - 0% ">BuildQueuePanel.BuildQueueMouseAdapter</a>
+                                    
+                                                                <a class="tag" href="net/sf/freecol/common/model/Map.html"
+                            style="font-size: 15px;color:#fae1a0"
+                            title="Average Method Complexity - 1,75 , Coverage - 76,6% ">Map.Position</a>
+                                    
+                                                                <a class="tag" href="net/sf/freecol/server/ai/AIColony.html"
+                            style="font-size: 18px;color:#d9695f"
+                            title="Average Method Complexity - 3,625 , Coverage - 25,5% ">AIColony</a>
+                                    
+                                                                <a class="tag" href="net/sf/freecol/client/gui/panel/BuildQueuePanel.html"
+                            style="font-size: 23px;color:#d04437"
+                            title="Average Method Complexity - 6,2 , Coverage - 0% ">BuildQueuePanel.BuildQueueTransferHandler</a>
+                                    
+                                                                <a class="tag" href="net/sf/freecol/client/gui/panel/BuildQueuePanel.html"
+                            style="font-size: 19px;color:#d04437"
+                            title="Average Method Complexity - 3,85 , Coverage - 0% ">BuildQueuePanel</a>
+                                    
+                                                                <a class="tag" href="net/sf/freecol/common/option/AudioMixerOption.html"
+                            style="font-size: 15px;color:#e7a19b"
+                            title="Average Method Complexity - 1,818 , Coverage - 56,4% ">AudioMixerOption</a>
+                                    
+                                                                <a class="tag" href="net/sf/freecol/common/model/Player.html"
+                            style="font-size: 15px;color:#e28e87"
+                            title="Average Method Complexity - 1,949 , Coverage - 45,8% ">Player</a>
+                                    
+                                                                <a class="tag" href="net/sf/freecol/common/model/ModelMessage.html"
+                            style="font-size: 17px;color:#de7b72"
+                            title="Average Method Complexity - 2,679 , Coverage - 31,3% ">ModelMessage</a>
+                                    
+                                                                <a class="tag" href="net/sf/freecol/client/gui/panel/BuildQueuePanel.html"
+                            style="font-size: 18px;color:#d04437"
+                            title="Average Method Complexity - 3,5 , Coverage - 0% ">BuildQueuePanel.DefaultBuildQueueCellRenderer</a>
+                                                    <p><a href="top-risks.html">See more</a></p>
+            </div>
+        </div>
+
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Most complex packages</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                
+                <table class="aui">
+                                            
+                                                <tr>
+                            <td>1. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.5717335</span>57,2%</div><div style="display: table-cell">
+ <div title="57,2% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:57.2%"></div></div></div></div></td>
+                            <td>
+                                <a href="net/sf/freecol/common/model/pkg-summary.html">net.sf.freecol.common.model</a>
+                                <span class="aui-badge" title="Package complexity">2046</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>2. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.25458714</span>25,5%</div><div style="display: table-cell">
+ <div title="25,5% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:25.5%"></div></div></div></div></td>
+                            <td>
+                                <a href="net/sf/freecol/server/ai/pkg-summary.html">net.sf.freecol.server.ai</a>
+                                <span class="aui-badge" title="Package complexity">203</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>3. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                            <td>
+                                <a href="net/sf/freecol/client/gui/panel/pkg-summary.html">net.sf.freecol.client.gui.panel</a>
+                                <span class="aui-badge" title="Package complexity">138</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>4. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.91230553</span>91,2%</div><div style="display: table-cell">
+ <div title="91,2% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:91.2%"></div></div></div></div></td>
+                            <td>
+                                <a href="net/sf/freecol/server/generator/pkg-summary.html">net.sf.freecol.server.generator</a>
+                                <span class="aui-badge" title="Package complexity">128</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>5. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.7385321</span>73,9%</div><div style="display: table-cell">
+ <div title="73,9% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:73.9%"></div></div></div></div></td>
+                            <td>
+                                <a href="net/sf/freecol/common/option/pkg-summary.html">net.sf.freecol.common.option</a>
+                                <span class="aui-badge" title="Package complexity">63</span>
+                            </td>
+                        </tr>
+                                    </table>
+            </div>
+        </div>
+
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Most complex classes</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <table class="aui">
+                                            
+                                                <tr>
+                            <td>1. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.62137264</span>62,1%</div><div style="display: table-cell">
+ <div title="62,1% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:62.1%"></div></div></div></div></td>
+                            <td>
+                                <a  href="net/sf/freecol/common/model/Unit.html"  title="net.sf.freecol.common.model.Unit">Unit</a>
+                                <span class="aui-badge" title="Class complexity">741</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>2. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.45793873</span>45,8%</div><div style="display: table-cell">
+ <div title="45,8% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:45.8%"></div></div></div></div></td>
+                            <td>
+                                <a  href="net/sf/freecol/common/model/Player.html"  title="net.sf.freecol.common.model.Player">Player</a>
+                                <span class="aui-badge" title="Class complexity">530</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>3. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.6528455</span>65,3%</div><div style="display: table-cell">
+ <div title="65,3% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:65.3%"></div></div></div></div></td>
+                            <td>
+                                <a  href="net/sf/freecol/common/model/Map.html"  title="net.sf.freecol.common.model.Map">Map</a>
+                                <span class="aui-badge" title="Class complexity">402</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>4. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.25458714</span>25,5%</div><div style="display: table-cell">
+ <div title="25,5% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:25.5%"></div></div></div></div></td>
+                            <td>
+                                <a  href="net/sf/freecol/server/ai/AIColony.html"  title="net.sf.freecol.server.ai.AIColony">AIColony</a>
+                                <span class="aui-badge" title="Class complexity">203</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>5. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.91230553</span>91,2%</div><div style="display: table-cell">
+ <div title="91,2% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:91.2%"></div></div></div></div></td>
+                            <td>
+                                <a  href="net/sf/freecol/server/generator/TerrainGenerator.html"  title="net.sf.freecol.server.generator.TerrainGenerator">TerrainGenerator</a>
+                                <span class="aui-badge" title="Class complexity">128</span>
+                            </td>
+                        </tr>
+                                    </table>
+            </div>
+        </div>
+
+                <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Least tested methods</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <table class="aui">
+                                            
+
+                    <tr>
+                        <td align="right">1.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="Player.getAllColonyValues(Tile)&#160;:&#160;List&lt;Double&gt;" href="net/sf/freecol/common/model/Player.html?line=3647#src-3647">Player.getAllColonyValues(Tile)&#160;:&#160;List&lt;Double&gt;</a>
+                            <span class="aui-badge" title="Method complexity">47</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">2.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="BuildQueuePanel.BuildQueueTransferHandler.importData(JComponent,Transferable)&#160;:&#160;boolean" href="net/sf/freecol/client/gui/panel/BuildQueuePanel.html?line=224#src-224">BuildQueuePanel.BuildQueueTransferHandler.importData(JComponent,Transferable)&#160;:&#160;boolean</a>
+                            <span class="aui-badge" title="Method complexity">25</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">3.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="AIColony.updateExportGoods(LogBuilder)&#160;:&#160;void" href="net/sf/freecol/server/ai/AIColony.html?line=741#src-741">AIColony.updateExportGoods(LogBuilder)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">17</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">4.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="BuildQueuePanel.BuildQueuePanel(FreeColClient,Colony)" href="net/sf/freecol/client/gui/panel/BuildQueuePanel.html?line=553#src-553">BuildQueuePanel.BuildQueuePanel(FreeColClient,Colony)</a>
+                            <span class="aui-badge" title="Method complexity">1</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">5.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="AIColony.updateGoodsWishes(LogBuilder)&#160;:&#160;void" href="net/sf/freecol/server/ai/AIColony.html?line=1096#src-1096">AIColony.updateGoodsWishes(LogBuilder)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">12</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">6.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="Unit.findIntermediatePort(Location)&#160;:&#160;PathNode" href="net/sf/freecol/common/model/Unit.html?line=3189#src-3189">Unit.findIntermediatePort(Location)&#160;:&#160;PathNode</a>
+                            <span class="aui-badge" title="Method complexity">18</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">7.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="BuildQueuePanel.updateBuildingList()&#160;:&#160;void" href="net/sf/freecol/client/gui/panel/BuildQueuePanel.html?line=753#src-753">BuildQueuePanel.updateBuildingList()&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">18</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">8.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="AIColony.updateWorkerWishes(LogBuilder)&#160;:&#160;void" href="net/sf/freecol/server/ai/AIColony.html?line=1011#src-1011">AIColony.updateWorkerWishes(LogBuilder)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">11</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">9.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="Unit.getOccupationLabel(Player,boolean)&#160;:&#160;StringTemplate" href="net/sf/freecol/common/model/Unit.html?line=3584#src-3584">Unit.getOccupationLabel(Player,boolean)&#160;:&#160;StringTemplate</a>
+                            <span class="aui-badge" title="Method complexity">15</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">10.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="Monarch.getWarSupport(Player,Random)&#160;:&#160;List&lt;AbstractUnit&gt;" href="net/sf/freecol/common/model/Monarch.html?line=747#src-747">Monarch.getWarSupport(Player,Random)&#160;:&#160;List&lt;AbstractUnit&gt;</a>
+                            <span class="aui-badge" title="Method complexity">9</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">11.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="Player.copyIn(T)&#160;:&#160;boolean" href="net/sf/freecol/common/model/Player.html?line=4086#src-4086">Player.copyIn(T)&#160;:&#160;boolean</a>
+                            <span class="aui-badge" title="Method complexity">3</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">12.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="Monarch.loadMercenaries(Random,List&lt;AbstractUnit&gt;)&#160;:&#160;int" href="net/sf/freecol/common/model/Monarch.html?line=810#src-810">Monarch.loadMercenaries(Random,List&lt;AbstractUnit&gt;)&#160;:&#160;int</a>
+                            <span class="aui-badge" title="Method complexity">9</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">13.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="BuildQueuePanel.BuildQueueMouseAdapter.mousePressed(MouseEvent)&#160;:&#160;void" href="net/sf/freecol/client/gui/panel/BuildQueuePanel.html?line=411#src-411">BuildQueuePanel.BuildQueueMouseAdapter.mousePressed(MouseEvent)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">13</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">14.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="BuildQueuePanel.updateUnitList()&#160;:&#160;void" href="net/sf/freecol/client/gui/panel/BuildQueuePanel.html?line=831#src-831">BuildQueuePanel.updateUnitList()&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">11</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">15.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="Monarch.loadMercenaryForce(Random,List&lt;AbstractUnit&gt;)&#160;:&#160;int" href="net/sf/freecol/common/model/Monarch.html?line=861#src-861">Monarch.loadMercenaryForce(Random,List&lt;AbstractUnit&gt;)&#160;:&#160;int</a>
+                            <span class="aui-badge" title="Method complexity">7</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">16.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="AIColony.resetExports()&#160;:&#160;void" href="net/sf/freecol/server/ai/AIColony.html?line=437#src-437">AIColony.resetExports()&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">9</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">17.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="ModelMessage.splitLinks(Player)&#160;:&#160;List&lt;Object&gt;" href="net/sf/freecol/common/model/ModelMessage.html?line=419#src-419">ModelMessage.splitLinks(Player)&#160;:&#160;List&lt;Object&gt;</a>
+                            <span class="aui-badge" title="Method complexity">6</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">18.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="Unit.copyIn(T)&#160;:&#160;boolean" href="net/sf/freecol/common/model/Unit.html?line=4586#src-4586">Unit.copyIn(T)&#160;:&#160;boolean</a>
+                            <span class="aui-badge" title="Method complexity">3</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">19.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="Map.subMap(int,int,int,int)&#160;:&#160;List&lt;Tile&gt;" href="net/sf/freecol/common/model/Map.html?line=909#src-909">Map.subMap(int,int,int,int)&#160;:&#160;List&lt;Tile&gt;</a>
+                            <span class="aui-badge" title="Method complexity">11</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">20.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="Monarch.getSupport(Random,boolean)&#160;:&#160;List&lt;AbstractUnit&gt;" href="net/sf/freecol/common/model/Monarch.html?line=677#src-677">Monarch.getSupport(Random,boolean)&#160;:&#160;List&lt;AbstractUnit&gt;</a>
+                            <span class="aui-badge" title="Method complexity">7</span>
+
+                        </td>
+                    </tr>
+                                    </table>
+            </div>
+        </div>
+        
+    </div>
+</div>
+                            </div> <!-- tabs-pane active-pane -->
+                        </div>
+
+    <script type="text/javascript" src="jit.js" ></script>
+    <script type="text/javascript" src="treemap-dash-json.js" ></script>
+
+                        </div> <!-- class="aui-page-panel-content-clover" -->
+                    <footer id="footer" role="contentinfo">
+    <section class="footer-body">
+        <ul>
+            <li>
+                Report generated by <a target="_new" href="http://openclover.org">OpenClover</a> v 4.4.1
+                on ons feb. 19 2020 15:33:10 CET using coverage data from ons feb. 19 2020 15:33:09 CET.
+            </li>
+        </ul>
+        <ul>
+            <li>OpenClover is free and open-source software. </li>
+        </ul>
+    </section>
+</footer>                </section> <!-- class="aui-page-panel-content" -->
+            </div> <!-- class="aui-page-panel-inner" -->
+        </div> <!-- class="aui-page-panel" -->
+    </div> <!-- id="page" -->
+</body>
+</html>
