@@ -174,35 +174,29 @@ public class TerrainGenerator {
         int equatorTemperature= 40;
         switch (temperaturePreference) {
         case MapGeneratorOptions.TEMPERATURE_COLD:
-            CodeCoverage.run("createLandRegions");
             poleTemperature = -20;
             equatorTemperature = 25;
             break;
         case MapGeneratorOptions.TEMPERATURE_CHILLY:
-            CodeCoverage.run("createLandRegions");
             poleTemperature = -20;
             equatorTemperature = 30;
             break;
         case MapGeneratorOptions.TEMPERATURE_TEMPERATE:
-            CodeCoverage.run("createLandRegions");
             poleTemperature = -10;
             equatorTemperature = 35;
             break;
         case MapGeneratorOptions.TEMPERATURE_WARM:
-            CodeCoverage.run("createLandRegions");
             poleTemperature = -5;
             equatorTemperature = 40;
             break;
         case MapGeneratorOptions.TEMPERATURE_HOT:
-            CodeCoverage.run("createLandRegions");
             poleTemperature = 0;
             equatorTemperature = 40;
             break;
         default:
-            CodeCoverage.run("createLandRegions");
             break;
         }
-        CodeCoverage.run("createLandRegions");
+        
 
         int temperatureRange = equatorTemperature-poleTemperature;
         int localeTemperature = poleTemperature + (90 - Math.abs(latitude))
@@ -226,97 +220,74 @@ public class TerrainGenerator {
         // Filter the candidates by temperature.
         int i = 0;
         while (i < candidateTileTypes.size()) {
-            CodeCoverage.run("createLandRegions");
             TileType type = candidateTileTypes.get(i);
             if (!type.withinRange(TileType.RangeType.TEMPERATURE,
-                                  localeTemperature)) {
-                CodeCoverage.run("createLandRegions");
+                                  localeTemperature)) {        
                 candidateTileTypes.remove(i);
                 continue;
             }
             i++;
         }
-        CodeCoverage.run("createLandRegions");
-
+        
         // Need to continue?
         switch (candidateTileTypes.size()) {
         case 0:
-            CodeCoverage.run("createLandRegions");
             // CodeCoverage.print();
             throw new RuntimeException("No TileType for"
                 + " temperature==" + localeTemperature);
         case 1:
-            CodeCoverage.run("createLandRegions");
             // CodeCoverage.print();
             return first(candidateTileTypes);
-        default:
-            CodeCoverage.run("createLandRegions");
+        default:   
             break;
         }
-        CodeCoverage.run("createLandRegions");
 
         // Filter the candidates by humidity.
         i = 0;
         while (i < candidateTileTypes.size()) {
-            CodeCoverage.run("createLandRegions");
             TileType type = candidateTileTypes.get(i);
             if (!type.withinRange(TileType.RangeType.HUMIDITY,
-                                  localeHumidity)) {
-                CodeCoverage.run("createLandRegions");
+                                  localeHumidity)) {   
                 candidateTileTypes.remove(i);
                 continue;
-            }
-            CodeCoverage.run("createLandRegions");
+            }   
             i++;
         }
-        CodeCoverage.run("createLandRegions");
 
         // Need to continue?
         switch (candidateTileTypes.size()) {
         case 0:
-            CodeCoverage.run("createLandRegions");
             // CodeCoverage.print();
             throw new RuntimeException("No TileType for"
                 + " humidity==" + localeHumidity);
         case 1:
-            CodeCoverage.run("createLandRegions");
             // CodeCoverage.print();
             return first(candidateTileTypes);
-        default:
-            CodeCoverage.run("createLandRegions");
+        default:   
             break;
         }
-        CodeCoverage.run("createLandRegions");
 
         // Filter the candidates by forest presence.
         boolean forested = randomInt(logger, "Forest", random, 100) < forestChance;
         i = 0;
         while (i < candidateTileTypes.size()) {
-            CodeCoverage.run("createLandRegions");
             TileType type = candidateTileTypes.get(i);
             if (type.isForested() != forested) {
-                CodeCoverage.run("createLandRegions");
                 candidateTileTypes.remove(i);
                 continue;
-            }
-            CodeCoverage.run("createLandRegions");
+            }   
             i++;
         }
-        CodeCoverage.run("createLandRegions");
-
         // Done
         switch (i = candidateTileTypes.size()) {
         case 0:
-            CodeCoverage.run("createLandRegions");
             // CodeCoverage.print();
             throw new RuntimeException("No TileType for"
                 + " forested==" + forested);
         case 1:
-            CodeCoverage.run("createLandRegions");
             // CodeCoverage.print();
             return first(candidateTileTypes);
         default:
-            CodeCoverage.run("createLandRegions");
             // CodeCoverage.print();
             return candidateTileTypes.get(randomInt(logger, "Forest tile",
                                                     random, i));
@@ -362,12 +333,17 @@ public class TerrainGenerator {
                     // rivers).
                     landmap[x][y] = tile.isLand()
                         && tile.getRegion() == null;
-                    if (tile.isLand()) {CodeCoverage.run("createLandRegions"); landsize++;};
-                    CodeCoverage.run("createLandRegions");
+                    if (tile.isLand()) {
+                        CodeCoverage.run("createLandRegions"); 
+                        landsize++;
+                    } else {
+                        CodeCoverage.run("createLandRegions"); 
+                    }
+                } else {
+                    CodeCoverage.run("createLandRegions"); 
                 }
-                CodeCoverage.run("createLandRegions");
             }
-            CodeCoverage.run("createLandRegions");
+            CodeCoverage.run("createLandRegions"); 
         }
         CodeCoverage.run("createLandRegions");
 
@@ -390,14 +366,14 @@ public class TerrainGenerator {
                                 CodeCoverage.run("createLandRegions");
                                 continentmap[xx][yy] = continents;
                                 landmap[xx][yy] = false;
+                            } else {
+                                CodeCoverage.run("createLandRegions"); 
                             }
-                            CodeCoverage.run("createLandRegions");
                         }
                         CodeCoverage.run("createLandRegions");
                     }
                     CodeCoverage.run("createLandRegions");
                 }
-                CodeCoverage.run("createLandRegions");
             }
             CodeCoverage.run("createLandRegions");
         }
@@ -439,7 +415,6 @@ public class TerrainGenerator {
                             CodeCoverage.run("createLandRegions");
                             splitcontinent[x][y] = false;
                         }
-                        CodeCoverage.run("createLandRegions");
                     }
                     CodeCoverage.run("createLandRegions");
                 }
@@ -451,8 +426,9 @@ public class TerrainGenerator {
                     if (continentsize[c] < 2*LAND_REGION_MAX_SIZE) {
                         CodeCoverage.run("createLandRegions");
                         targetsize = continentsize[c]/2;
+                    } else {
+                        CodeCoverage.run("createLandRegions"); 
                     }
-                    CodeCoverage.run("createLandRegions");
                     continents++; //index of the new region in continentmap[][]
                     boolean[][] newregion = Map.floodFillBool(splitcontinent,
                         splitX, splitY, targetsize);
@@ -465,21 +441,24 @@ public class TerrainGenerator {
                                 continentmap[x][y] = continents;
                                 splitcontinent[x][y] = false;
                                 continentsize[c]--;
+                            } else {
+                                CodeCoverage.run("createLandRegions"); 
                             }
-                            CodeCoverage.run("createLandRegions");
                             if (splitcontinent[x][y]) {
                                 CodeCoverage.run("createLandRegions");
                                 splitX = x; splitY = y;
+                            } else {
+                                CodeCoverage.run("createLandRegions"); 
                             }
-                            CodeCoverage.run("createLandRegions");
                         }
                         CodeCoverage.run("createLandRegions");
                     }
                     CodeCoverage.run("createLandRegions");
                 }
                 CodeCoverage.run("createLandRegions");
+            } else {
+                CodeCoverage.run("createLandRegions"); 
             }
-            CodeCoverage.run("createLandRegions");
         }
         CodeCoverage.run("createLandRegions");
         lb.add("Number of land regions being created: ", continents, "\n");
@@ -503,8 +482,9 @@ public class TerrainGenerator {
                     CodeCoverage.run("createLandRegions");
                     Tile tile = map.getTile(x, y);
                     landregions[continentmap[x][y]].addTile(tile);
+                } else {
+                    CodeCoverage.run("createLandRegions"); 
                 }
-                CodeCoverage.run("createLandRegions");
             }
             CodeCoverage.run("createLandRegions");
         }
