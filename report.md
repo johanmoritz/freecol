@@ -12,13 +12,17 @@ An open-source turn-based strategy game based on Colonization. The goal of the g
 
 ## Onboarding experience
 
-Did it build and run as documented?
-    
-See the assignment for details; if everything works out of the box,
-there is no need to write much here. If the first project(s) you picked
-ended up being unsuitable, you can describe the "onboarding experience"
-for each project, along with reason(s) why you changed to a different one.
+The project is very easy to build. All you need to do to build it is running `ant` and it will do the rest of the work for you. 
 
+To install `ant`, we used (sdkman)[https://sdkman.io/] which is a package manager for java systems. sdkman can be installed with a one-liner and the installation gives post-install instructions as well, making the process very simple. With the help of sdkman, ant can be installed with a one-liner as well. Some people in the group had issues with their terminals not reloading automatically, but after restarting them all worked well.
+
+Regarding the documentation quality of the build tools, it's a bit hard to tell how good they are. The usage we needed from sdkman as well as from ant could be easily found from their respective cli help, so, as far as we can tell, they are very well documented. We have not had to dig deep into any documentation though so this just might be pure luck.
+
+As far as we can tell, the only secondary components the build installed were unit testing framework and other libraries used by the project. Nothing is installed globally.
+
+The build always worked perfectly, without any errors and running tests was also very easy on our systems (macOS and ubuntu), only needing to run for example`ant alltest`.
+
+In conclusiong, Yes, we plan to continue using this project.
 
 ## Complexity
 
