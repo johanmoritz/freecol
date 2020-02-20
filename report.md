@@ -22,7 +22,7 @@ As far as we can tell, the only secondary components the build installed were un
 
 The build always worked perfectly, without any errors and running tests was also very easy on our systems (macOS and ubuntu), only needing to run for example`ant alltest`.
 
-In conclusiong, Yes, we plan to continue using this project.
+In conclusion, Yes, we plan to continue using this project.
 
 ## Complexity
 
@@ -80,7 +80,7 @@ All test cases have been documented in the following issues:
 
 BaseCostDecided::getCost [Commit c0f](https://github.com/johanmoritz/freecol/commit/c0fcbb68d50f69fcc8e39832dd6123fc50786144), [Commit 624](https://github.com/johanmoritz/freecol/commit/6248844cda338e19f31b48370848db09cb2c9fac)
 
-Map::findMapPath [Issue #39](https://github.com/johanmoritz/freecol/issues/39)
+Map::findMapPath [Issue #39](https://github.com/johanmoritz/freecol/issues/39) see this commit: [51b965d](https://github.com/johanmoritz/freecol/commit/51b965d0406b63c0974bbd811d31a335890c5f7d)
 
 Monarch::actionIsValid [Issue #40](https://github.com/johanmoritz/freecol/issues/40)
 
