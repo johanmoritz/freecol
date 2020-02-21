@@ -123,8 +123,11 @@ CCN calculated manually: 15
 Purpose: Sets the location for a Unit instance.
 
 Complexity analysis: This is a setter method in the Unit class for the location field. It only takes the parameter newLocation, which is the value the field should be set to. In the game, units belong to colonies depending on which colony their location belongs to. Other attributes of the unit also depends on which colony they are in. All this is handled by this method, which cause the high complexity. We have not attempted to refactor this function but an idea which could reduce complexity is to move this colony logic to the Colony class. There is, however, a comment stating the following:
-
-We have to handle this issue here in setLocation as this is the only place that contains information about both locations.
+```java
+// We have to handle this issue here in setLocation as this is
+// the only place that contains information about both
+// locations.
+```
 
 So there seems to have been some thought in handling the colony logic here.
 Documentation is clear.
