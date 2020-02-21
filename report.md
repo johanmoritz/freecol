@@ -81,6 +81,8 @@ This function was refactored in #57.
 
 CCN according to lizard: 22
 
+CCN according to manual count: 21
+
 Purpose: Returns the display object of a given message type.
 
 Complexity analysis: The function takes two parameters messageType and source, messageType is of course the given message type and source is what the display will be taken from. The function is basically a big switch statement and most of the cases are fall through. Some cases even fall through to the default case which increases the complexity redundantly.
