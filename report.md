@@ -25,14 +25,121 @@ The build always worked perfectly, without any errors and running tests was also
 In conclusion, Yes, we plan to continue using this project.
 
 ## Complexity
+**Function: Monarch::actionIsValid**
 
-1. What are your results for ten complex functions?
-   * Did all tools/methods get the same result?
-   * Are the results clear?
-2. Are the functions just complex, or also long?
-3. What is the purpose of the functions?
-4. Are exceptions taken into account in the given measurements?
-5. Is the documentation clear w.r.t. all the possible outcomes?
+CCN according to lizard: 19
+
+Purpose: Checks if a specified action is valid for a Monarch at the current game time.
+
+Complexity analysis: I believe that this function does not do too much or too little. It only has a switch statement in it that covers every possible value the parameter can have (considering it's an enum). If there would be something to change, then it would be to remove the empty cases which could reduce the CCN slightly and use the default case instead (which right now will never be used).
+
+**Function:**  TerrainGenerator::createLandRegions
+
+Purpose: Takes a map of a continuous stretch of land, and divides it into a number of regions depending on how the map is defined.
+
+Complexity analysis: createLandRegions is complex because it tries to heavily optimize a lot of different processes by running them together and avoiding unnecessary data copying between functions. The function itself is inherently complex because it does a lot of different steps. A way to reduce the complexity would needlessly sacrifice a bit of speed for a smaller a more succinct function.
+
+**Function:**  Player::readChild
+
+CCN according to lizard: 22
+
+Purpose: Reads a player object, based of a tag, from an xml file and then creates it.
+
+Complexity analysis: This function is basically a bunch of branches that go through as many (if not all?) cases as possible of what the tag in the xml file could be. These will be difficult to reduce the complexity of, but there are inner if-statements that could be moved out (to perhaps the create function called) as they do a little bit more than just read the object and create it. It also handles cases such as nulls, which could be moved out.
+
+**Function:**  Scope::equals
+
+CCN according to lizard: 18
+
+Purpose: Compares two scope objects to each other
+
+Complexity analysis: Compares the relevant fields to each other to check that these two objects are in fact equal. However, also does some null checks which could be handled in the get-ers for said fields. This would remove that logic from the function completely, which makes sense considering that it should only compare the values and not have to handle nulls.
+
+**Function:**  BaseCostDecider::getCost
+
+CNN according to lizard:: 24
+
+CNN according to manuel count: 19
+
+Purpose::Determines the cost of a single move.
+
+Complexity analysis:
+The function takes four arguments: (final Unit unit, final Location oldLocation, final Location newLocation, int movesLeftBefore)
+
+-Unit: the unit making the move
+-oldLocation: the location we are moving from
+-newLocation: the location we are moving to
+-movesLeftBefore: The moves left before making the move
+-Return: the cost of moving a unit from oldLocation to newLocation
+
+The function compares different moves based on what unit type, terrain, new location and old location, determines the cost for the move. The code is easy to follow and together with the documentation quite self evident.
+
+The reason for the high CCN for the function is mainly the many switch statements and if statements, it is hard to decrease the CCN without moving out some of the methods.
+This function was refactored in #57.
+
+**Function:** ModelMessage::getDefaultDisplay
+
+CCN according to lizard: 22
+
+Purpose: Returns the display object of a given message type.
+
+Complexity analysis: The function takes two parameters messageType and source, messageType is of course the given message type and source is what the display will be taken from. The function is basically a big switch statement and most of the cases are fall through. Some cases even fall through to the default case which increases the complexity redundantly.
+
+**Function:**  Monarch::initializeCaches
+
+CCN according to lizard: 25
+
+CNN according to manuel count: 19 and 22
+
+Purpose: Cache the unit types and roles for support and mercenary offers.
+
+Complexity analysis: Structurize unit in a neat way based on their abilities and group them together. Depending on the type of unit based Navel, Bombard, Land, Mercenary, the units get put into a group of corresponding class.
+The code is not very well documented, but it is quite clear what it does.
+
+The function consist of if-else statement and therefore hard to improve the CCN without moving some of the methods to outside the function.
+
+**Function:**  Map::findMapPath
+
+CCN according to lizard: 23
+
+Purpose: Finds a path on the map for a unit, from start tile to end tile.
+
+Complexity analysis: The function takes the parameters unit, start, end, carrier, costDecider, and lb (LogBuilder). It has several if statements. The main one checks whether the start and end tile are contiguous (belong to the same part of the map). The other if statements checks attributes of the unit and the tiles, such as:
+
+-water/land units
+-water/land tiles
+-carrier units
+-unit is on carrier
+
+It makes sense that the function is complex since pathfinding is a complex task. The function is not overly complex since its sole purpose is to set the parameters of the main pathfinding function called searchMap, which is much more complex.
+Documentation is clear.
+
+**Function:**  Unit::setLocation
+
+CCN according to lizard: 20
+
+CCN calculated manually: 15
+
+Purpose: Sets the location for a Unit instance.
+
+Complexity analysis: This is a setter method in the Unit class for the location field. It only takes the parameter newLocation, which is the value the field should be set to. In the game, units belong to colonies depending on which colony their location belongs to. Other attributes of the unit also depends on which colony they are in. All this is handled by this method, which cause the high complexity. We have not attempted to refactor this function but an idea which could reduce complexity is to move this colony logic to the Colony class. There is, however, a comment stating the following:
+
+// We have to handle this issue here in setLocation as this is
+// the only place that contains information about both
+// locations.
+
+So there seems to have been some thought in handling the colony logic here.
+Documentation is clear.
+
+
+**Function:** Player::writeChildren
+
+CCN according to lizard: 22
+
+Purpose: Writes Player attributes (children) to a XML file using the FreeColXMLWriter class.
+
+Complexity analysis: The function converts each field in the Player class to XML and writes to a stream (FreeColXMLWriter). The complexity is high since it contains a bunch of if statements that check whether certain fields exists, and loops for fields that are Collections. We have not refactored this but it would probably be a good idea to move much of this logic to the FreeColXMLWriter class. For example, adding a writeField method (check if field != null and then writes it), and a writeCollection method (writes a collection/list of values to the stream). In its current state the method is unnecessarily complex.
+Documentation is clear in the FreeColXMLWriter class, the method in the Player class lacks documentation.
 
 ## Coverage
 
@@ -78,16 +185,15 @@ Show the comments that describe the requirements for the coverage.
 
 All test cases have been documented in the following issues:
 
-BaseCostDecided::getCost [Issue #38](https://github.com/johanmoritz/freecol/issues/38), see this commit: [c0fcbb6](https://github.com/johanmoritz/freecol/commit/c0fcbb68d50f69fcc8e39832dd6123fc50786144) & [6248844](https://github.com/johanmoritz/freecol/commit/6248844cda338e19f31b48370848db09cb2c9fac)
+BaseCostDecided::getCost [Commit c0f](https://github.com/johanmoritz/freecol/commit/c0fcbb68d50f69fcc8e39832dd6123fc50786144), [Commit 624](https://github.com/johanmoritz/freecol/commit/6248844cda338e19f31b48370848db09cb2c9fac)
 
 Map::findMapPath [Issue #39](https://github.com/johanmoritz/freecol/issues/39), see this commit: [51b965d](https://github.com/johanmoritz/freecol/commit/51b965d0406b63c0974bbd811d31a335890c5f7d)
 
-Monarch::actionIsValid [Issue #40](https://github.com/johanmoritz/freecol/issues/40), see these commits: [bd0b6f3](https://github.com/johanmoritz/freecol/commit/bd0b6f3d4c0731e333844f97e88445c81407c8d6) & [ebd3db1](https://github.com/johanmoritz/freecol/commit/ebd3db16a59a713f179ba0c9347717454ecea6c8)
+Monarch::actionIsValid [Issue #40](https://github.com/johanmoritz/freecol/issues/40)
 
 ModelMessage::getDefaultDisplay [Issue #42](https://github.com/johanmoritz/freecol/issues/42), see this commit: [5c54519](https://github.com/johanmoritz/freecol/commit/5c54519465ba9c5ca3e2cddf34f747baeeab9eed)
 
-Scope::equals [Issue #48](https://github.com/johanmoritz/freecol/issues/48), see this commit: [f520e74](https://github.com/johanmoritz/freecol/commit/f520e74eb58d41d40badb741544e7d4e4a3e5f9b)
-
+Scope::equals [Issue #48](https://github.com/johanmoritz/freecol/issues/48)
 
 ## Refactoring
 
