@@ -159,7 +159,9 @@ The code coverage tool we created keeps track of visited branches using a HashMa
 public static HashMap<String, HashMap<Integer, Integer>> functions = new HashMap<>();
 ```
 A function's HashMap is stored using the function name as key, for example "initializeCaches" for the initializeCaches() function.
+
 CodeCoverage.run(<function_name>) must be added manually to a branch for the tool to measure its coverage.
+
 This method fetches the line number from which it is called and uses this as key in the function's HashMap to keep track of how many times the branch is visited:
 ```java
 public static void run(String functionName) {
@@ -171,7 +173,9 @@ public static void run(String functionName) {
 }
 ```
 See the full code for the tool in this branch:
+
 [link](https://github.com/johanmoritz/freecol/tree/feature/code-coverage-system)
+
 Or use this git command:
 ```
 git diff master feature/code-coverage-system
