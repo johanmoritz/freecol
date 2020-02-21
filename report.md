@@ -183,14 +183,17 @@ git diff master feature/code-coverage-system
 ### Evaluation
 
 1. How detailed is your coverage measurement?
+
 Our coverage tool implements branch coverage and not statement coverage.
 It can be used for statement coverage if the code is refactored when manually adding the calls to CodeCoverage.run().
 
 2. What are the limitations of your own tool?
+
 It requires manual instrumentation.
 Fall trough cases in switch statements needs to be refactored and have breaks added.
 
 3. Are the results of your tool consistent with existing coverage tools?
+
 The results of our tool differs slightly from the OpenClover results.
 OpenClover measures both branch and statement cover, which could explain why the results differ.
 Also, OpenClover's automatic branch and statement detection may miss some branches and statements.
