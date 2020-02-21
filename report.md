@@ -256,4 +256,6 @@ git diff ...
 
 What are your main take-aways from this project? What did you learn?
 
+It was interesting to just dive into an old (since 2003), large (122k loc) and ongoing project. The project was both consistent and incosistent, you could see that the code was supposed to look a certain way and follow some convention but there was also a lot of differences between different contributors.
+
 Is there something special you want to mention here?
