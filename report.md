@@ -273,8 +273,10 @@ git diff ...
 
 What are your main take-aways from this project? What did you learn?
 
+None of us have ever worked with an open source project before. We didn't really know what the challanges would be diving into a project of this scope, but it turned out alright and it has lower the barrier for working on open source projects in the future.
+
 In this project, we have gained an understanding and appreciation of the benefits and drawbacks of metrics and their tools, and the knowledge needed to create new test cases or to enhance existing tests that improve statement or branch coverage.
 
-It was interesting to just dive into an old (since 2003), large (122k loc) and ongoing project. The project was both consistent and incosistent, you could see that the code was supposed to look a certain way and follow some convention but there was also a lot of differences between different contributors.
+The project was interesting, to just dive into an old (since 2003), large (122k loc) and ongoing project. The project was both consistent and incosistent, you could see that the code was supposed to look a certain way and follow some convention but there was also a lot of differences between different contributors. We learned to adapt our way of coding to the project conventions to keep the code following in a certain structure to keep it to the standard.
 
 Is there something special you want to mention here?
