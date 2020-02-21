@@ -247,6 +247,16 @@ This refactoring wasn't carried out.
 
 See this issue:[link](https://github.com/johanmoritz/freecol/issues/55)
 
+
+**Refactor getCost::BaseCostDecider to reduce CCN**
+
+git diff 81dbd73783b77bdb2643c0606f963190cdc2e8c7 8bb7dfed15bcaf5cf797467b17e64178f0036853
+
+Refactor BaseCostDecider:getCost by moving the switch statement to outside of the function and call it. Estimated to reduce the CCN by at least 50%. Created a new function called reduceCC which is the whole “else” statement including the switch cases.
+The CCN before the refactoring according to lizard is 24 and by manuel count 19. After the refactoring the CCN is 11 according to Lizard and 7 by manuel count. See #57
+
+
+
 Plan for refactoring complex code:
 
 Estimated impact of refactoring (lower CC, but other drawbacks?).
