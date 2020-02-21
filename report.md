@@ -247,6 +247,10 @@ This refactoring wasn't carried out.
 
 See this issue:[link](https://github.com/johanmoritz/freecol/issues/55)
 
+This refactoring was implemented in the reduce-CC branch. Run the following command to see changes:
+```
+git diff 7c9b31a 8bb7dfe
+```
 
 **Refactor getCost::BaseCostDecider to reduce CCN**
 
