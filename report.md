@@ -29,6 +29,8 @@ In conclusion, Yes, we plan to continue using this project.
 
 CCN according to lizard: 19
 
+CCN according to us: 5 (see [issue #34](https://github.com/johanmoritz/freecol/issues/34))
+
 Purpose: Checks if a specified action is valid for a Monarch at the current game time.
 
 Complexity analysis: I believe that this function does not do too much or too little. It only has a switch statement in it that covers every possible value the parameter can have (considering it's an enum). If there would be something to change, then it would be to remove the empty cases which could reduce the CCN slightly and use the default case instead (which right now will never be used).
@@ -43,6 +45,8 @@ Complexity analysis: createLandRegions is complex because it tries to heavily op
 
 CCN according to lizard: 22
 
+CCN according to us: 21 (see [issue #33](https://github.com/johanmoritz/freecol/issues/33))
+
 Purpose: Reads a player object, based of a tag, from an xml file and then creates it.
 
 Complexity analysis: This function is basically a bunch of branches that go through as many (if not all?) cases as possible of what the tag in the xml file could be. These will be difficult to reduce the complexity of, but there are inner if-statements that could be moved out (to perhaps the create function called) as they do a little bit more than just read the object and create it. It also handles cases such as nulls, which could be moved out.
@@ -50,6 +54,8 @@ Complexity analysis: This function is basically a bunch of branches that go thro
 **Function:**  Scope::equals
 
 CCN according to lizard: 18
+
+CCN according to us: 5 (see [issue #53](https://github.com/johanmoritz/freecol/issues/53))
 
 Purpose: Compares two scope objects to each other
 
@@ -59,7 +65,7 @@ Complexity analysis: Compares the relevant fields to each other to check that th
 
 CNN according to lizard:: 24
 
-CNN according to manuel count: 19
+CNN according to manual count: 19 (see [issue #9](https://github.com/johanmoritz/freecol/issues/9)
 
 Purpose::Determines the cost of a single move.
 
@@ -91,7 +97,7 @@ Complexity analysis: The function takes two parameters messageType and source, m
 
 CCN according to lizard: 25
 
-CNN according to manuel count: 19 and 22
+CNN according to manuel count: 19 and 22 (see [issue #35](https://github.com/johanmoritz/freecol/issues/35))
 
 Purpose: Cache the unit types and roles for support and mercenary offers.
 
@@ -120,7 +126,7 @@ Documentation is clear.
 
 CCN according to lizard: 20
 
-CCN calculated manually: 15
+CCN calculated manually: 15 (see [issue #11](https://github.com/johanmoritz/freecol/issues/11))
 
 Purpose: Sets the location for a Unit instance.
 
@@ -143,6 +149,8 @@ Purpose: Writes Player attributes (children) to a XML file using the FreeColXMLW
 
 Complexity analysis: The function converts each field in the Player class to XML and writes to a stream (FreeColXMLWriter). The complexity is high since it contains a bunch of if statements that check whether certain fields exists, and loops for fields that are Collections. We have not refactored this but it would probably be a good idea to move much of this logic to the FreeColXMLWriter class. For example, adding a writeField method (check if field != null and then writes it), and a writeCollection method (writes a collection/list of values to the stream). In its current state the method is unnecessarily complex.
 Documentation is clear in the FreeColXMLWriter class, the method in the Player class lacks documentation.
+
+**CCN comparison analysis of all ten functions:** We believe that the reason why the CCN calculated by us and the CCN lizard gave us differed so much in two of the functions (and not as much in the rest) might be due to how it handles exit nodes because of this being a common factor in both of these.
 
 ## Coverage
 
