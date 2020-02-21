@@ -196,7 +196,8 @@ OpenClover measures both branch and statement cover, which could explain why the
 Also, OpenClover's automatic branch and statement detection may miss some branches and statements.
 
 Here are some coverage measurements according to OpenClover and our own tool (after coverage improvements):
-Function | OpenClover | mobergliuslefors Code Coverage tool
+
+Function | OpenClover | mobergliuslefors code coverage tool
 -- | -- | --
 initializeCaches | 97,5% | 95.7%
 writeChildren | 49,2% | 50.0%
