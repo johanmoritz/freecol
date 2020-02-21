@@ -269,15 +269,25 @@ git diff 81dbd73 8bb7dfe
 Refactor BaseCostDecider:getCost by moving the switch statement to outside of the function and call it. Estimated to reduce the CCN by at least 50%. Created a new function called reduceCC which is the whole “else” statement including the switch cases.
 The CCN before the refactoring according to lizard is 24 and by manuel count 19. After the refactoring the CCN is 11 according to Lizard and 7 by manuel count. See issue [#57](https://github.com/johanmoritz/freecol/issues/57)
 
+**Refactor Scope::equals to reduce CCN**
 
+It is possible to get rid of the nested if-statements checking for nulls like these ones
 
-Plan for refactoring complex code:
+`if (abilityId == null) {
+    if (!Utils.equals(other.getAbilityId(), abilityId)) {
+        return false;
+    }
+}`
 
-Estimated impact of refactoring (lower CC, but other drawbacks?).
+by simply moving this logic to the .getAbilityId() function in this case. Performing the null check logic inside of getAbilityId() would allow it to simply return an empty string in the case of a null for example, which makes more sense logically speaking rather than a null object being in a string. Instead of doing these two if-statements, one could simply do
 
-Carried out refactoring (optional)
+`if (getAbilityId().equals(other.getAbilityId())) {
+    return false;
+}`
 
-git diff ...
+Now that the get-function will return a string in this case.
+
+Under the assumption that the CCN is 5 ( as calculated in [issue #53](https://github.com/johanmoritz/freecol/issues/53) ) this would reduce it to 1, considering that we would remove 4 comparisons.
 
 ## Overall experience
 
