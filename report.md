@@ -153,19 +153,29 @@ integrate it with your build environment? -->
 
 We used OpenClover to get code coverage for the project. This was a fairly straightforward installation and setup proccess but it relied on quite a bit of search-engine-luck to get everything running smoothly. OpenClover has a library (as a `.jar` file) made directly for the ant build system as well as a "two-liner" setup for any ant project. It took us some time to figure out where to put the library on our system and also how where in the build.xml file to put this "two-liner". Thankfully the FreeCol project is setup in a really nice, modular way so as soon as we found the correct placement of the setup, all test commands could be used together with OpenClover and a bunch of OpenClover commands showed up as tasks when listing them with `ant`.
 
-### DYI
-
-Show a patch (or link to a branch) that shows the instrumented code to
-gather coverage measurements.
-
-The patch is probably too long to be copied here, so please add
-the git command that is used to obtain the patch instead:
-
-git diff ...
-
-What kinds of constructs does your tool support, and how accurate is
-its output?
-
+### DIY
+The code coverage tool we created keeps track of visited branches using a HashMap with one HashMap per branch:
+```java
+public static HashMap<String, HashMap<Integer, Integer>> functions = new HashMap<>();
+```
+A function's HashMap is stored using the function name as key, for example "initializeCaches" for the initializeCaches() function.
+CodeCoverage.run(<function_name>) must be added manually to a branch for the tool to measure its coverage.
+This method fetches the line number from which it is called and uses this as key in the function's HashMap to keep track of how many times the branch is visited:
+```java
+public static void run(String functionName) {
+    int lineNumber = getLineNumber();
+    HashMap<Integer, Integer> functionEntries = CodeCoverage.functions.getOrDefault(functionName, new HashMap<>());
+    int touches = functionEntries.getOrDefault(lineNumber, 1);
+    functionEntries.put(lineNumber, touches + 1);
+    CodeCoverage.functions.put(functionName, functionEntries);
+}
+```
+See the full code for the tool in this branch:
+[link](https://github.com/johanmoritz/freecol/tree/feature/code-coverage-system)
+Or use this git command:
+```
+git diff master feature/code-coverage-system
+```
 ### Evaluation
 
 1. How detailed is your coverage measurement?
