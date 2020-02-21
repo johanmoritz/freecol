@@ -244,7 +244,8 @@ The refactoring basically removes 8 cases so the complexity should be decremente
 This refactoring wasn't carried out.
 
 **Refactoring of Map::findMapPath**
-See this issue: [link](https://github.com/johanmoritz/freecol/issues/55)
+
+See this issue:[link](https://github.com/johanmoritz/freecol/issues/55)
 
 Plan for refactoring complex code:
 
