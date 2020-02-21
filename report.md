@@ -78,7 +78,7 @@ Show the comments that describe the requirements for the coverage.
 
 All test cases have been documented in the following issues:
 
-BaseCostDecided::getCost [Commit c0f](https://github.com/johanmoritz/freecol/commit/c0fcbb68d50f69fcc8e39832dd6123fc50786144), [Commit 624](https://github.com/johanmoritz/freecol/commit/6248844cda338e19f31b48370848db09cb2c9fac)
+BaseCostDecided::getCost [Issue #38](https://github.com/johanmoritz/freecol/issues/38), see this commit: [c0fcbb6](https://github.com/johanmoritz/freecol/commit/c0fcbb68d50f69fcc8e39832dd6123fc50786144) & [6248844](https://github.com/johanmoritz/freecol/commit/6248844cda338e19f31b48370848db09cb2c9fac)
 
 Map::findMapPath [Issue #39](https://github.com/johanmoritz/freecol/issues/39), see this commit: [51b965d](https://github.com/johanmoritz/freecol/commit/51b965d0406b63c0974bbd811d31a335890c5f7d)
 
