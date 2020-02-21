@@ -82,11 +82,12 @@ BaseCostDecided::getCost [Commit c0f](https://github.com/johanmoritz/freecol/com
 
 Map::findMapPath [Issue #39](https://github.com/johanmoritz/freecol/issues/39), see this commit: [51b965d](https://github.com/johanmoritz/freecol/commit/51b965d0406b63c0974bbd811d31a335890c5f7d)
 
-Monarch::actionIsValid [Issue #40](https://github.com/johanmoritz/freecol/issues/40)
+Monarch::actionIsValid [Issue #40](https://github.com/johanmoritz/freecol/issues/40), see these commits: [bd0b6f3](https://github.com/johanmoritz/freecol/commit/bd0b6f3d4c0731e333844f97e88445c81407c8d6) & [ebd3db1](https://github.com/johanmoritz/freecol/commit/ebd3db16a59a713f179ba0c9347717454ecea6c8)
 
 ModelMessage::getDefaultDisplay [Issue #42](https://github.com/johanmoritz/freecol/issues/42), see this commit: [5c54519](https://github.com/johanmoritz/freecol/commit/5c54519465ba9c5ca3e2cddf34f747baeeab9eed)
 
-Scope::equals [Issue #48](https://github.com/johanmoritz/freecol/issues/48)
+Scope::equals [Issue #48](https://github.com/johanmoritz/freecol/issues/48), see this commit: [f520e74](https://github.com/johanmoritz/freecol/commit/f520e74eb58d41d40badb741544e7d4e4a3e5f9b)
+
 
 ## Refactoring
 
