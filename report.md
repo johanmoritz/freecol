@@ -80,11 +80,11 @@ All test cases have been documented in the following issues:
 
 BaseCostDecided::getCost [Commit c0f](https://github.com/johanmoritz/freecol/commit/c0fcbb68d50f69fcc8e39832dd6123fc50786144), [Commit 624](https://github.com/johanmoritz/freecol/commit/6248844cda338e19f31b48370848db09cb2c9fac)
 
-Map::findMapPath [Issue #39](https://github.com/johanmoritz/freecol/issues/39) see this commit: [51b965d](https://github.com/johanmoritz/freecol/commit/51b965d0406b63c0974bbd811d31a335890c5f7d)
+Map::findMapPath [Issue #39](https://github.com/johanmoritz/freecol/issues/39), see this commit: [51b965d](https://github.com/johanmoritz/freecol/commit/51b965d0406b63c0974bbd811d31a335890c5f7d)
 
 Monarch::actionIsValid [Issue #40](https://github.com/johanmoritz/freecol/issues/40)
 
-ModelMessage::getDefaultDisplay [Issue #42](https://github.com/johanmoritz/freecol/issues/42)
+ModelMessage::getDefaultDisplay [Issue #42](https://github.com/johanmoritz/freecol/issues/42), see this commit: [5c54519](https://github.com/johanmoritz/freecol/commit/5c54519465ba9c5ca3e2cddf34f747baeeab9eed)
 
 Scope::equals [Issue #48](https://github.com/johanmoritz/freecol/issues/48)
 
