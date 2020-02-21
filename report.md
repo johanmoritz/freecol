@@ -213,6 +213,7 @@ Scope::equals [Issue #48](https://github.com/johanmoritz/freecol/issues/48), see
 ## Refactoring
 
 **Refactoring ModelMessage::getDefaultDisplay:**
+
 This function has a switch statement with a lot of "fall through" cases, i.e. cases without breaks. There's as many as 8 of these that fall through to the default which is a very interesting design choice.
 
 So the plan is to reduce the complexity by just deleting all of those cases and letting them default to default instead.
