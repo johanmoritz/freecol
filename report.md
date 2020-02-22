@@ -216,12 +216,18 @@ Here are some coverage measurements according to OpenClover and our own tool (af
 
 Function | OpenClover | mobergliuslefors code coverage tool
 -- | -- | --
-initializeCaches | 97,5% | 95.7%
-writeChildren | 49,2% | 50.0%
-readChild | 50,4% | 32.1%
-setLocation | 93,3% | 92.6%
-getDefaultDisplay | 52,7% | 50.0%
-updateTileImprovementPlans | 75,9% | 76.0%
+Monarch::initializeCaches | 97.5% | 95.7%
+Player::writeChildren | 49.2% | 50.0%
+Player::readChild | 50.4% | 32.1%
+Unit::setLocation | 93.3% | 92.6%
+ModelMessage::getDefaultDisplay | 52.7% | 50.0%
+AIColony::updateTileImprovementPlans | 75.9% | 76.0%
+Scope::equals | 96.9% | 96.7%
+Monarch::actionIsValid | 94% | 93.8%
+TerrainGenerator::createLandRegions | 98.4% | 98.2%
+Map::findMapPath | 96.7% | 100%
+BaseCostDecider::getCost | 70.9% | 66.7%
+AbstractOption::readOption | 87.9% | 80.0%
 
 ### Coverage improvement
 
