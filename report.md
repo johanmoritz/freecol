@@ -37,9 +37,13 @@ Complexity analysis: I believe that this function does not do too much or too li
 
 **Function:**  TerrainGenerator::createLandRegions
 
+CCN according to lizard: 31
+
+CCN according to us: 27 (see [issue #51](https://github.com/johanmoritz/freecol/issues/51)
+
 Purpose: Takes a map of a continuous stretch of land, and divides it into a number of regions depending on how the map is defined.
 
-Complexity analysis: createLandRegions is complex because it tries to heavily optimize a lot of different processes by running them together and avoiding unnecessary data copying between functions. The function itself is inherently complex because it does a lot of different steps. A way to reduce the complexity would needlessly sacrifice a bit of speed for a smaller a more succinct function.
+Complexity analysis: createLandRegions is complex because it tries to heavily optimize a lot of different processes by running them together and avoiding unnecessary data copying between functions. The function itself is inherently complex because it does a lot of different steps. A way to reduce the complexity would needlessly sacrifice a bit of speed for a smaller and more succinct function.
 
 **Function:**  Player::readChild
 
