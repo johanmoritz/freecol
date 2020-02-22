@@ -293,6 +293,25 @@ Now that the get-function will return a string in this case.
 
 Under the assumption that the CCN is 5 ( as calculated in [issue #53](https://github.com/johanmoritz/freecol/issues/53) ) this would reduce it to 1, considering that we would remove 4 comparisons.
 
+**Refactor TerrainGenerator::createLandRegions to reduce CCN**
+
+Relevant [issue](https://github.com/johanmoritz/freecol/issues/44).
+
+The actual refactor is done in commit [be095679f](https://github.com/johanmoritz/freecol/commit/be095679f339320499a5c4b65202ad21c7098791), and resulted in a CCN decrease by over 80% (from 31 to 5 according to lizard, 27 to 5 by manual count).
+
+Refactoring `createLandRegions` took advantage of the heavy use of loops and data dependencies originally present in the code. Data dependencies presented as arrays or matrices were passed arround inside the loops, iteratively transformed based on their current and previous values. First were the core data dependecies identified and placed inside a utility object `Continents`. `Continents`, then, was used to store temporary results and was passed to and, especially, from extracted helper functions. 
+
+This allowed to split `createLandRegions` into the main steps 
+
+    1. Partition map into Continents
+    2. Get continent sizes
+    3. Split bigger continents
+    4. Generate land regions
+    5. Add tiles to land regions
+    6. Set exploration points 
+
+where only points 4 (partially) and 6 are not single statements (function calls). 
+
 ## Overall experience
 
 What are your main take-aways from this project? What did you learn?
